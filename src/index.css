@@ -1,0 +1,30 @@
+/* pallet */
+:root {
+  --primary-color: #082032;
+  --primary-light-color: #334756;
+  --primary-dark-color: #2c394b;
+  --secondary-color: #ff4c29;
+
+  --subTitle-color: #a9a9a9;
+  --secundary-text-color: #484848;
+  --primary-link-color: #87cefa;
+  --secundary-link-color: #035283;
+
+  --white-color: #ffffff;
+  --black-color: #000000;
+  font-size: 16px;
+}
+
+@media screen and (max-width: 830px) {
+  :root {
+    font-size: 18px;
+  }
+}
+a {
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style-type: none;
+}

@@ -1,0 +1,62 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  height: 70px;
+  background-color: #082032;
+  padding: 0 32px;
+  z-index: 10;
+}
+
+.containerForMobile {
+  height: 100vh;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.link {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0 1rem;
+  height: 100%;
+  cursor: pointer;
+}
+
+.title {
+  color: white;
+  font-size: 1.2rem;
+}
+
+.bars {
+  display: none !important;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+}
+
+.content_show {
+  display: flex !important;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media screen and (max-width: 830px) {
+  .bars {
+    display: block !important;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-100%, 50%);
+    cursor: pointer;
+  }
+  .content {
+    display: none;
+  }
+}
