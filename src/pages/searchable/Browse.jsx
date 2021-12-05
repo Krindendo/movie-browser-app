@@ -7,6 +7,7 @@ import { movieService } from "services/movie.service"
 
 export default function Browse() {
   const [movies, setMovies] = useState([])
+  const [submitedValue, setSubmitedValue] = useState()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,11 +19,15 @@ export default function Browse() {
     fetchData()
   }, [])
 
+  const getSubmitedValue = (value) => {
+    setSubmitedValue(value)
+  }
+
   return (
     <Layout>
       <Container>
         <Content>
-          <SearchInput />
+          <SearchInput getSubmitedValue={getSubmitedValue} />
         </Content>
         <MovieList>
           <ListOfMovies movies={movies} />

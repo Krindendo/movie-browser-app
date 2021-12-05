@@ -2,8 +2,23 @@ import api from "helper/apiRequest"
 import { formatDate } from "helper/formatDate"
 const baseUrl = "/api/v1/movie"
 
-const getAllMovies = async (rating = 5, limit = 10) => {
-  const data = await api(baseUrl + `?rating=${rating}&limit=${limit}`, "GET")
+const getAllMovies = async (title, rating, titleSort, releasedSort, skip) => {
+  let content = []
+  let apiCall = "?"
+  if (title) content.push(`&title=${title}`)
+  if (rating) content.push(`&rating=${rating}`)
+  if (titleSort) content.push(`&titleSort=${titleSort}`)
+  if (releasedSort) content.push(`&releasedSort=${releasedSort}`)
+  if (skip) content.push(`&skip=${skip}`)
+
+  if (content.length > 0) {
+    content[0] = content[0].substring(1)
+    apiCall = content.reduce((prevItem, curentItem) => prevItem + curentItem)
+  } else {
+    apiCall = ""
+  }
+  console.log("apiCall", apiCall)
+  const data = await api(baseUrl + apiCall, "GET")
   if (data?.movies) {
     return data.movies
   }

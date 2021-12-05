@@ -6,11 +6,30 @@ import Button from "@mui/material/Button"
 import TextField from "@mui/material/TextField"
 
 export default function SearchInput(props) {
-  const {} = props
-  const [input, setInput] = useState("")
+  const { getSubmitedValue } = props
+  const [values, setValues] = useState({ input: "", genre: "", rating: "", orderBy: "" })
+  const [nesto, setNesto] = useState({ title: "", rating: "", titleSort: "", releasedSort: "", skip: "" })
 
-  const handleInputChange = (event) => {
-    setInput(event.target.value)
+  const submitValue = (e) => {
+    const { name, value } = e.target
+    setValues((inputs) => ({ ...inputs, [name]: value }))
+    // getSubmitedValue(value)
+  }
+
+  const handleSubmit = () => {
+    console.log("value", values)
+    const { input, genre, rating, orderBy } = values
+    let titleSort, releasedSort
+    if (orderBy === "najnoviji") {
+      releasedSort = "asc"
+    }
+    if (orderBy === "najstariji") {
+      releasedSort = "desc"
+    }
+    if (orderBy === "abecedno") {
+      titleSort = "asc"
+    }
+    setNesto({ title: input, rating: rating, titleSort, releasedSort, skip: null })
   }
 
   return (
@@ -18,22 +37,44 @@ export default function SearchInput(props) {
       <Title>Pretraga</Title>
       <UpperPart>
         <TextFieldStyled
-          value={input}
-          onChange={handleInputChange}
+          value={values.input}
+          onChange={submitValue}
+          name="input"
           color="secondary"
           variant="outlined"
           size="small"
           inputProps={{ style: { color: "white", height: "25px" } }}
           fullWidth
         />
-        <Button color="secondary" variant="contained" size="large" sx={{ my: 1, mx: 1.5 }}>
+        <Button color="secondary" variant="contained" size="large" sx={{ my: 1, mx: 1.5 }} onClick={handleSubmit}>
           Pretraga
         </Button>
       </UpperPart>
       <BottomPart>
-        <Dropdown id="genre" title="Žanr" list={genre} color="secondary" styled={{ minWidth: "120px" }} />
-        <Dropdown id="rating" title="Ocena" list={rating} color="secondary" styled={{ minWidth: "120px" }} />
-        <Dropdown id="orderBy" title="Sortiranje po" list={orderBy} color="secondary" styled={{ minWidth: "120px" }} />
+        <Dropdown
+          id="genre"
+          title="Žanr"
+          list={genreList}
+          color="secondary"
+          styled={{ minWidth: "120px" }}
+          submitValue={submitValue}
+        />
+        <Dropdown
+          id="rating"
+          title="Ocena"
+          list={ratingList}
+          color="secondary"
+          styled={{ minWidth: "120px" }}
+          submitValue={submitValue}
+        />
+        <Dropdown
+          id="orderBy"
+          title="Sortiranje po"
+          list={orderByList}
+          color="secondary"
+          styled={{ minWidth: "120px" }}
+          submitValue={submitValue}
+        />
       </BottomPart>
     </Container>
   )
@@ -68,14 +109,14 @@ const TextFieldStyled = muiStyled(TextField)(() => ({
   }
 }))
 
-const genre = [
+const genreList = [
   { id: 0, name: "All", value: "All" },
   { id: 1, name: "All", value: "All" },
   { id: 2, name: "All", value: "All" },
   { id: 3, name: "All", value: "All" }
 ]
 
-const rating = [
+const ratingList = [
   { id: 0, name: "Svi", value: "All" },
   { id: 1, name: "9+", value: "9" },
   { id: 2, name: "8+", value: "8" },
@@ -87,9 +128,8 @@ const rating = [
   { id: 8, name: "2+", value: "2" }
 ]
 
-const orderBy = [
-  { id: 0, name: "Najnoviji", value: "Najnoviji" },
-  { id: 1, name: "Najstariji", value: "Najstariji" },
-  { id: 2, name: "Po broju glasova", value: "PoBrojuGlasova" },
-  { id: 3, name: "Abecedno", value: "Abecedno" }
+const orderByList = [
+  { id: 0, name: "Najnoviji", value: "najnoviji" },
+  { id: 1, name: "Najstariji", value: "najstariji" },
+  { id: 2, name: "Abecedno", value: "abecedno" }
 ]
