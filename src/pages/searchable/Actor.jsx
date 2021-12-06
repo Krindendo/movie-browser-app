@@ -11,7 +11,6 @@ export default function Actor() {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log("actorId", actorId)
       const actor = await actorService.getActor(actorId)
       if (actor) {
         setActor(actor)

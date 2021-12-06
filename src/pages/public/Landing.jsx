@@ -24,10 +24,7 @@ export default function Landing() {
         <UpperPart>
           <LeftPart>
             <Title>Svi domaći filmovi na jednom mestu</Title>
-            <Subtitle>
-              Filmovi.pretraga is the leading destination to find & showcase creative work and home to the world's best
-              design professionals.
-            </Subtitle>
+            <Subtitle>Pretražujte domaće filmove brzo, lako i jednostavno</Subtitle>
           </LeftPart>
           <RightPart>
             <Image src={undrawSvg} alt="undraw horror movie" />

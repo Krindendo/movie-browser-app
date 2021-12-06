@@ -57,8 +57,10 @@ export default function Button({ text, type = "button" }) {
 
   const handleClick = (event) => {
     const target = event.target
-    console.log("e.pageY", event.pageY - target.offsetTop)
-    console.log("e.pageY", event.pageX - target.offsetLeft)
+    if (process.env.NODE_ENV === "development") {
+      console.log("e.pageY", event.pageY - target.offsetTop)
+      console.log("e.pageY", event.pageX - target.offsetLeft)
+    }
   }
 
   return (

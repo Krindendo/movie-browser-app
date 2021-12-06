@@ -8,7 +8,6 @@ import Select from "@mui/material/Select"
 export default function Dropdown(props) {
   const { id, title, list, submitValue } = props
   const [select, setSelect] = useState(list[0].value)
-
   const handleChange = (event) => {
     setSelect(event.target.value)
     submitValue(event)

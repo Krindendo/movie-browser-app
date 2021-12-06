@@ -11,13 +11,25 @@ export default function Browse() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await movieService.getAllMovies()
+      let data
+      if (submitedValue) {
+        data = await movieService.getAllMovies(
+          submitedValue.title,
+          submitedValue.rating,
+          submitedValue.titleSort,
+          submitedValue.releasedSort,
+          submitedValue.skip
+        )
+      } else {
+        data = await movieService.getAllMovies("", "", "", "desc")
+      }
+
       if (data) {
         setMovies(data)
       }
     }
     fetchData()
-  }, [])
+  }, [submitedValue])
 
   const getSubmitedValue = (value) => {
     setSubmitedValue(value)

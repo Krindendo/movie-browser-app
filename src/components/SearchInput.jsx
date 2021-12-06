@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import styled from "styled-components"
 import { styled as muiStyled } from "@mui/material/styles"
 import Dropdown from "./Dropdown"
@@ -7,29 +7,32 @@ import TextField from "@mui/material/TextField"
 
 export default function SearchInput(props) {
   const { getSubmitedValue } = props
-  const [values, setValues] = useState({ input: "", genre: "", rating: "", orderBy: "" })
-  const [nesto, setNesto] = useState({ title: "", rating: "", titleSort: "", releasedSort: "", skip: "" })
+  const [values, setValues] = useState({ input: "", genre: "", rating: "", orderBy: orderByList[0].value })
 
   const submitValue = (e) => {
     const { name, value } = e.target
     setValues((inputs) => ({ ...inputs, [name]: value }))
-    // getSubmitedValue(value)
   }
 
   const handleSubmit = () => {
-    console.log("value", values)
-    const { input, genre, rating, orderBy } = values
+    let { input, genre, rating, orderBy } = values
     let titleSort, releasedSort
     if (orderBy === "najnoviji") {
-      releasedSort = "asc"
+      releasedSort = "desc"
     }
     if (orderBy === "najstariji") {
-      releasedSort = "desc"
+      releasedSort = "asc"
     }
     if (orderBy === "abecedno") {
       titleSort = "asc"
     }
-    setNesto({ title: input, rating: rating, titleSort, releasedSort, skip: null })
+    if (rating === "default") {
+      rating = ""
+    }
+    if (genre === "default") {
+      genre = ""
+    }
+    getSubmitedValue({ title: input, rating: rating, titleSort, releasedSort, skip: null })
   }
 
   return (
@@ -110,14 +113,14 @@ const TextFieldStyled = muiStyled(TextField)(() => ({
 }))
 
 const genreList = [
-  { id: 0, name: "All", value: "All" },
+  { id: 0, name: "Svi", value: "default" },
   { id: 1, name: "All", value: "All" },
   { id: 2, name: "All", value: "All" },
   { id: 3, name: "All", value: "All" }
 ]
 
 const ratingList = [
-  { id: 0, name: "Svi", value: "All" },
+  { id: 0, name: "Svi", value: "default" },
   { id: 1, name: "9+", value: "9" },
   { id: 2, name: "8+", value: "8" },
   { id: 3, name: "7+", value: "7" },
