@@ -4,8 +4,10 @@ import Layout from "layout/Layout"
 import SearchInput from "components/SearchInput"
 import ListOfMovies from "components/ListOfMovies"
 import { movieService } from "services/movie.service"
+import useQuery from "hooks/useRouteQuery"
 
 export default function Browse() {
+  let query = useQuery()
   const [movies, setMovies] = useState([])
   const [submitedValue, setSubmitedValue] = useState()
 
@@ -20,16 +22,17 @@ export default function Browse() {
           submitedValue.releasedSort,
           submitedValue.skip
         )
+      } else if (query.get("title")) {
+        data = await movieService.getAllMovies(query.get("title"), "", "", "desc")
       } else {
         data = await movieService.getAllMovies("", "", "", "desc")
       }
-
       if (data) {
         setMovies(data)
       }
     }
     fetchData()
-  }, [submitedValue])
+  }, [query, submitedValue])
 
   const getSubmitedValue = (value) => {
     setSubmitedValue(value)

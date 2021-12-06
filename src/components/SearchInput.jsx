@@ -1,12 +1,14 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import styled from "styled-components"
 import { styled as muiStyled } from "@mui/material/styles"
 import Dropdown from "./Dropdown"
 import Button from "@mui/material/Button"
 import TextField from "@mui/material/TextField"
+import useQuery from "hooks/useRouteQuery"
 
 export default function SearchInput(props) {
   const { getSubmitedValue } = props
+  let query = useQuery()
   const [values, setValues] = useState({ input: "", genre: "", rating: "", orderBy: orderByList[0].value })
 
   const submitValue = (e) => {
@@ -34,6 +36,13 @@ export default function SearchInput(props) {
     }
     getSubmitedValue({ title: input, rating: rating, titleSort, releasedSort, skip: null })
   }
+
+  useEffect(() => {
+    let title = query.get("title")
+    if (title) {
+      setValues((inputs) => ({ ...inputs, input: title }))
+    }
+  }, [query])
 
   return (
     <Container>

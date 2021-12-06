@@ -14,7 +14,7 @@ export default function SearchInputNavbar() {
   const handleSubmit = (event) => {
     event.preventDefault()
     if (title) {
-      history.push(process.env.REACT_APP_PATH_BROWSE)
+      history.push(process.env.REACT_APP_PATH_BROWSE + `?title=${title}`)
     }
   }
 
