@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react"
-import styles from "./styles.module.css"
-import clsx from "clsx"
-import { useHistory } from "react-router-dom"
+import styled from "styled-components"
+import { useHistory, useLocation } from "react-router-dom"
 import authService from "services/auth.service"
-import { Link } from "react-router-dom"
+import { Link as LinkR } from "react-router-dom"
 import Button from "@mui/material/Button"
 import SearchInputNavbar from "components/SearchInputNavbar"
 import MenuIcon from "@mui/icons-material/Menu"
@@ -14,6 +13,7 @@ export default function Header() {
   const [showNavbar, setShowNavbar] = useState(true)
   const { width } = useWindowDimensions()
   let history = useHistory()
+  let { pathname } = useLocation()
 
   const handleLogout = async (event) => {
     event.preventDefault()
@@ -35,20 +35,18 @@ export default function Header() {
     setShowNavbar((prev) => !prev)
   }
 
+  useEffect(() => {
+    setShowNavbar(false)
+  }, [pathname])
+
   return (
-    <header className={clsx(styles.container, showNavbar && styles.containerForMobile)}>
-      <Link className={styles.title} to={process.env.REACT_APP_PATH_LANDING}>
-        Filmovi.pretraga
-      </Link>
-      <MenuIcon onClick={handleShow} className={styles.bars} fontSize="large" color="secondary" />
-      <nav className={clsx(styles.content, showNavbar && styles.content_show)}>
+    <Container showNavbar={showNavbar}>
+      <Title to={process.env.REACT_APP_PATH_LANDING}>Filmovi.pretraga</Title>
+      <Bars onClick={handleShow} fontSize="large" color="secondary" />
+      <Content showNavbar={showNavbar}>
         <SearchInputNavbar />
-        <Link className={styles.link} to={process.env.REACT_APP_PATH_LANDING}>
-          Početna
-        </Link>
-        <Link className={styles.link} to={process.env.REACT_APP_PATH_BROWSE}>
-          Pretraga fimova
-        </Link>
+        <Link to={process.env.REACT_APP_PATH_LANDING}>Početna</Link>
+        <Link to={process.env.REACT_APP_PATH_BROWSE}>Pretraga fimova</Link>
         {isLogged ? (
           <Button onClick={handleLogout} color="secondary" variant="contained" sx={{ my: 1, mx: 1.5 }}>
             Odjavi se
@@ -60,7 +58,58 @@ export default function Header() {
             </Button>
           </Link>
         )}
-      </nav>
-    </header>
+      </Content>
+    </Container>
   )
 }
+
+const Container = styled.header`
+  display: flex;
+  flex-direction: ${(props) => (props.showNavbar ? "column" : "row")};
+  justify-content: ${(props) => (props.showNavbar ? "center" : "space-between")};
+  gap: ${(props) => (props.showNavbar ? "20px" : "0")};
+  align-items: center;
+  position: sticky;
+  top: 0;
+  height: ${(props) => (props.showNavbar ? "100vh" : "70px")};
+  background-color: #082032;
+  padding: 0 32px;
+  z-index: 10;
+`
+
+const Link = styled(LinkR)`
+  color: #fff;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0 1rem;
+  height: 100%;
+  cursor: pointer;
+`
+
+const Title = styled(LinkR)`
+  color: white;
+  font-size: 1.2rem;
+`
+
+const Bars = styled(MenuIcon)`
+  display: none !important;
+  @media screen and (max-width: 830px) {
+    display: block !important;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-100%, 50%);
+    cursor: pointer;
+  }
+`
+
+const Content = styled.nav`
+  display: flex;
+  align-items: center;
+  flex-direction: ${(props) => (props.showNavbar ? "column" : "row")};
+  gap: ${(props) => (props.showNavbar ? "1rem" : "0")};
+  @media screen and (max-width: 830px) {
+    display: ${(props) => (props.showNavbar ? "flex" : "none")};
+  }
+`
