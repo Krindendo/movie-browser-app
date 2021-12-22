@@ -6,16 +6,22 @@ import { movieService } from "services/movie.service"
 import Layout from "layout/Layout"
 import UpperPart from "./components/UpperPart"
 import LowerPart from "./components/LowerPart"
+import CommentPart from "./components/CommentPart"
 
 export default function MoviePages() {
   const [movie, setMovie] = useState()
+  const [comments, setComments] = useState()
   const { titleId } = useParams()
 
   useEffect(() => {
     const fetchData = async () => {
       const movie = await movieService.getSingleMovie(titleId)
+      const comments = await movieService.getSingleMovieComments(titleId)
       if (movie) {
         setMovie(movie)
+      }
+      if (comments) {
+        setComments(comments)
       }
     }
     fetchData()
@@ -32,6 +38,9 @@ export default function MoviePages() {
           </Content>
           <BottomWrapper>
             <LowerPart movie={movie} />
+          </BottomWrapper>
+          <BottomWrapper>
+            <CommentPart comments={comments} />
           </BottomWrapper>
         </Container>
       </Layout>
