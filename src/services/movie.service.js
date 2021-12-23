@@ -32,8 +32,9 @@ const getSingleMovie = async (movieId) => {
 }
 const getSingleMovieComments = async (movieId) => {
   const data = await api(baseUrl + `/${movieId}/comments`, "GET")
-  if (data?.movie) {
-    return data.movie
+  console.log("data", data)
+  if (data?.comments) {
+    return data.comments
   }
   return null
 }

@@ -1,14 +1,16 @@
 import CommentBox from "components/CommentBox"
+import AddComment from "components/AddComment"
 
 export default function CommentPart({ comments }) {
-  if (comments.lenght > 0) {
-    return (
-      <div>
-        {comments.map((comment) => (
-          <CommentBox comment={comment} />
-        ))}
-      </div>
-    )
+  const user = localStorage.getItem("userId")
+
+  const handleOpenDialog = () => {
+    console.log("clicked")
   }
-  return <div></div>
+  return (
+    <>
+      {comments?.length > 0 && comments.map((comment) => <CommentBox comment={comment} key={comment._id} />)}
+      {user && <AddComment handleOpenDialog={handleOpenDialog} />}
+    </>
+  )
 }

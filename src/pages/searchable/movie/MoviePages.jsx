@@ -39,9 +39,12 @@ export default function MoviePages() {
           <BottomWrapper>
             <LowerPart movie={movie} />
           </BottomWrapper>
-          <BottomWrapper>
+          <BottomWrapperReviews>
+            <h3>Recenzije</h3>
+          </BottomWrapperReviews>
+          <BottomWrapperReviews>
             <CommentPart comments={comments} />
-          </BottomWrapper>
+          </BottomWrapperReviews>
         </Container>
       </Layout>
     )
@@ -59,7 +62,6 @@ export default function MoviePages() {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 6em;
 `
 const Content = styled.div`
   background-color: var(--primary-dark-color);
@@ -68,11 +70,16 @@ const Content = styled.div`
 `
 const Wrapper = styled.div`
   max-width: 1600px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
   gap: 4em;
 `
 const BottomWrapper = styled(Wrapper)`
+  flex-direction: row;
+  padding: 6rem 0 3rem 0;
+`
+const BottomWrapperReviews = styled(Wrapper)`
   flex-direction: row;
 `
