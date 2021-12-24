@@ -11,12 +11,12 @@ import CommentPart from "./components/CommentPart"
 export default function MoviePages() {
   const [movie, setMovie] = useState()
   const [comments, setComments] = useState()
-  const { titleId } = useParams()
+  const { movieId } = useParams()
 
   useEffect(() => {
     const fetchData = async () => {
-      const movie = await movieService.getSingleMovie(titleId)
-      const comments = await movieService.getSingleMovieComments(titleId)
+      const movie = await movieService.getSingleMovie(movieId)
+      const comments = await movieService.getSingleMovieComments(movieId)
       if (movie) {
         setMovie(movie)
       }
@@ -25,7 +25,7 @@ export default function MoviePages() {
       }
     }
     fetchData()
-  }, [titleId])
+  }, [movieId])
 
   if (movie) {
     return (

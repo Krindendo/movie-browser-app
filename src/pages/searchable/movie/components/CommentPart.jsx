@@ -4,13 +4,10 @@ import AddComment from "components/AddComment"
 export default function CommentPart({ comments }) {
   const user = localStorage.getItem("userId")
 
-  const handleOpenDialog = () => {
-    console.log("clicked")
-  }
   return (
     <>
       {comments?.length > 0 && comments.map((comment) => <CommentBox comment={comment} key={comment._id} />)}
-      {user && <AddComment handleOpenDialog={handleOpenDialog} />}
+      {user && <AddComment />}
     </>
   )
 }
