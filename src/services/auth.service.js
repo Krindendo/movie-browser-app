@@ -1,4 +1,5 @@
 import api from "helper/apiRequest"
+import Cookies from "universal-cookie"
 const baseUrl = "/api/v1/auth"
 
 const register = async (body) => {
@@ -22,6 +23,8 @@ const login = async (body) => {
 const logout = async () => {
   const data = await api(baseUrl + "/logout", "GET", true)
   localStorage.clear()
+  const cookies = new Cookies()
+  cookies.remove("local_token")
   if (data?.msg) {
     return data.msg
   }
@@ -40,5 +43,6 @@ const saveUser = (_user) => {
   if (_user) {
     localStorage.setItem("userName", _user.name)
     localStorage.setItem("userId", _user.userId)
+    new Cookies().set("local_token", _user.userId, { expires: new Date(Date.now() + 24 * 60 * 60 * 1000) })
   }
 }
