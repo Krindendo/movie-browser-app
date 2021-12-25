@@ -20,10 +20,6 @@ export default function Actor() {
     fetchData()
   }, [actorId])
 
-  useEffect(() => {
-    console.log("actor", actor)
-  }, [actor])
-
   if (actor) {
     return (
       <Layout>

@@ -29,10 +29,6 @@ export default function MoviePages() {
     fetchData()
   }, [movieId, isCommentsChanged])
 
-  useEffect(() => {
-    console.log("comments", comments)
-  }, [comments])
-
   const handleChanged = () => {
     setIsCommentsChanged((prevValue) => prevValue + 1)
   }
