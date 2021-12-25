@@ -4,6 +4,7 @@ import Layout from "layout/Layout"
 import { useParams } from "react-router-dom"
 import { actorService } from "services/actor.service"
 import ListOfMovies from "components/ListOfMovies"
+import Loading from "pages/public/Loading"
 
 export default function Actor() {
   const [actor, setActor] = useState()
@@ -62,11 +63,7 @@ export default function Actor() {
     )
   }
 
-  return (
-    <Layout>
-      <p>Nepostojeci glumac</p>
-    </Layout>
-  )
+  return <Loading />
 }
 const Container = styled.section`
   display: flex;

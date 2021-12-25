@@ -6,7 +6,7 @@ import AddCommentDialog from "./AddCommentDialog"
 import { commentService } from "services/comment.service"
 import { useParams } from "react-router-dom"
 
-export default function AddComment() {
+export default function AddComment({ handleChanged }) {
   let { movieId } = useParams()
   const [open, setOpen] = useState(false)
 
@@ -20,6 +20,7 @@ export default function AddComment() {
   const handleSave = (input) => {
     commentService.createComment({ movie_id: movieId, text: input })
     setOpen(false)
+    handleChanged()
   }
 
   return (

@@ -7,8 +7,10 @@ import Layout from "layout/Layout"
 import UpperPart from "./components/UpperPart"
 import LowerPart from "./components/LowerPart"
 import CommentPart from "./components/CommentPart"
+import Loading from "pages/public/Loading"
 
 export default function MoviePages() {
+  const [isCommentsChanged, setIsCommentsChanged] = useState(0)
   const [movie, setMovie] = useState()
   const [comments, setComments] = useState()
   const { movieId } = useParams()
@@ -25,7 +27,11 @@ export default function MoviePages() {
       }
     }
     fetchData()
-  }, [movieId])
+  }, [movieId, isCommentsChanged])
+
+  const handleChanged = () => {
+    setIsCommentsChanged((prevValue) => prevValue + 1)
+  }
 
   if (movie) {
     return (
@@ -43,20 +49,14 @@ export default function MoviePages() {
             <h3>Recenzije</h3>
           </BottomWrapperReviews>
           <BottomWrapperReviews>
-            <CommentPart comments={comments} />
+            <CommentPart comments={comments} handleChanged={handleChanged} />
           </BottomWrapperReviews>
         </Container>
       </Layout>
     )
   }
 
-  return (
-    <Layout>
-      <div>
-        <p>Film nije pronadjen</p>
-      </div>
-    </Layout>
-  )
+  return <Loading />
 }
 
 const Container = styled.div`

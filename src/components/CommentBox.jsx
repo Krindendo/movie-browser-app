@@ -8,7 +8,7 @@ import { commentService } from "services/comment.service"
 import AddCommentDialog from "./AddCommentDialog"
 import useAuth from "hooks/useAuth"
 
-export default function CommentBox({ comment }) {
+export default function CommentBox({ comment, handleChanged }) {
   const [open, setOpen] = useState(false)
   const { isUserHaveComment } = useAuth()
 
@@ -21,10 +21,12 @@ export default function CommentBox({ comment }) {
 
   const handleEdit = (input) => {
     commentService.updateComment(comment._id, { text: input })
+    handleChanged()
     setOpen(false)
   }
   const handleDelete = () => {
     commentService.deleteComment(comment._id)
+    handleChanged()
   }
 
   if (comment) {
