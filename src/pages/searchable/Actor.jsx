@@ -79,6 +79,10 @@ const MiddleSection = styled.div`
   display: flex;
   align-items: center;
   gap: 5em;
+
+  @media only screen and (max-width: 830px) {
+    flex-direction: column;
+  }
 `
 const BottomSection = styled.div`
   margin-top: 4rem;

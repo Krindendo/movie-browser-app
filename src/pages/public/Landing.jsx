@@ -127,7 +127,6 @@ const FilmContainer = styled.section`
   @media only screen and (max-width: 1500px) {
     grid-template-columns: 275px 275px 275px 275px;
   }
-
   @media only screen and (max-width: 1250px) {
     grid-template-columns: 275px 275px 275px;
   }

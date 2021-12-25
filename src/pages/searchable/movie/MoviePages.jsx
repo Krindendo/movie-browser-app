@@ -78,8 +78,9 @@ const Wrapper = styled.div`
 `
 const BottomWrapper = styled(Wrapper)`
   flex-direction: row;
-  padding: 6rem 0 3rem 0;
+  padding: 6rem 12px 3rem;
 `
 const BottomWrapperReviews = styled(Wrapper)`
   flex-direction: row;
+  padding: 0px 12px;
 `

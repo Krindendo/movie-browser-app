@@ -69,4 +69,17 @@ const MovieList = styled.div`
   max-width: 1600px;
   margin: 3rem auto;
   gap: 2rem;
+
+  @media only screen and (max-width: 1500px) {
+    grid-template-columns: 275px 275px 275px 275px;
+  }
+  @media only screen and (max-width: 1250px) {
+    grid-template-columns: 275px 275px 275px;
+  }
+  @media only screen and (max-width: 940px) {
+    grid-template-columns: 275px 275px;
+  }
+  @media only screen and (max-width: 650px) {
+    grid-template-columns: 275px;
+  }
 `

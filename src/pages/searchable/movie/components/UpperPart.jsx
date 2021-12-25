@@ -54,6 +54,8 @@ const SubTitle = styled.h4`
   color: var(--subTitle-color);
 `
 const List = styled.ul`
+  display: flex;
+  gap: 6px;
   list-style-type: none;
   padding: 0;
 `

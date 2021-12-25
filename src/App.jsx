@@ -7,7 +7,6 @@ import LoginPage from "pages/account/Login"
 import RegisterPage from "pages/account/Register"
 import ActorPage from "pages/searchable/Actor"
 import BrowsePage from "pages/searchable/Browse"
-import BrowseMoviesPage from "pages/searchable/BrowseMovies"
 import MoviePage from "pages/searchable/movie/MoviePages"
 const SettingsPage = lazy(() => import("pages/protected/settings/Settings"))
 
@@ -20,7 +19,6 @@ export default function App() {
           <Route path={process.env.REACT_APP_PATH_LOGIN} component={LoginPage} />
           <Route path={process.env.REACT_APP_PATH_REGISTER} component={RegisterPage} />
           <Route path={process.env.REACT_APP_PATH_BROWSE} component={BrowsePage} />
-          <Route path={process.env.REACT_APP_PATH_BROWSE_ID} component={BrowseMoviesPage} />
           <Route path={process.env.REACT_APP_PATH_MOVIE_ID} component={MoviePage} />
           <Route path={process.env.REACT_APP_PATH_ACTOR_ID} component={ActorPage} />
           {/* <AuthRoute exact path="/settings" component={SettingsPage} /> */}
