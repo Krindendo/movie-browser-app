@@ -6,9 +6,11 @@ import CloseIcon from "@mui/icons-material/Close"
 import EditIcon from "@mui/icons-material/Edit"
 import { commentService } from "services/comment.service"
 import AddCommentDialog from "./AddCommentDialog"
+import useAuth from "hooks/useAuth"
 
 export default function CommentBox({ comment }) {
   const [open, setOpen] = useState(false)
+  const { isUserHaveComment } = useAuth()
 
   const handleOpenDialog = () => {
     setOpen(true)
@@ -32,8 +34,12 @@ export default function CommentBox({ comment }) {
           <Text>{formatDate(new Date(comment.date))}</Text>
           <Text>{comment.name}</Text>
           <SubText>{comment.text}</SubText>
-          <EditIconStyled onClick={handleOpenDialog} />
-          <CloseIconStyled onClick={handleDelete} />
+          {isUserHaveComment([comment]) && (
+            <>
+              <EditIconStyled onClick={handleOpenDialog} />
+              <CloseIconStyled onClick={handleDelete} />
+            </>
+          )}
         </StyledBox>
         <AddCommentDialog open={open} handleClose={handleCloseDialog} handleClick={handleEdit} />
       </>

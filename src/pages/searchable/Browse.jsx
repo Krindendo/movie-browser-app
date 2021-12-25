@@ -4,10 +4,10 @@ import Layout from "layout/Layout"
 import SearchInput from "components/SearchInput"
 import ListOfMovies from "components/ListOfMovies"
 import { movieService } from "services/movie.service"
-import useQuery from "hooks/useRouteQuery"
+import useRouterQuery from "hooks/useRouteQuery"
 
 export default function Browse() {
-  let query = useQuery()
+  let query = useRouterQuery()
   const [movies, setMovies] = useState([])
   const [submitedValue, setSubmitedValue] = useState()
 

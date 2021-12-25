@@ -7,9 +7,10 @@ import Button from "@mui/material/Button"
 import SearchInputNavbar from "components/SearchInputNavbar"
 import MenuIcon from "@mui/icons-material/Menu"
 import useWindowDimensions from "hooks/useWindowDimensions"
+import useAuth from "hooks/useAuth"
 
 export default function Header() {
-  const [isLogged, setIsLogged] = useState(localStorage.getItem("userName"))
+  const { isLoggedIn } = useAuth()
   const [showNavbar, setShowNavbar] = useState(true)
   const { width } = useWindowDimensions()
   let history = useHistory()
@@ -19,7 +20,6 @@ export default function Header() {
     event.preventDefault()
     const msg = await authService.logout()
     if (msg) {
-      setIsLogged(null)
       history.push("/")
     }
   }
@@ -47,7 +47,7 @@ export default function Header() {
         <SearchInputNavbar />
         <Link to={process.env.REACT_APP_PATH_LANDING}>Početna</Link>
         <Link to={process.env.REACT_APP_PATH_BROWSE}>Pretraga fimova</Link>
-        {isLogged ? (
+        {isLoggedIn ? (
           <Button onClick={handleLogout} color="secondary" variant="contained" sx={{ my: 1, mx: 1.5 }}>
             Odjavi se
           </Button>

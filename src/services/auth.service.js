@@ -23,8 +23,7 @@ const login = async (body) => {
 const logout = async () => {
   const data = await api(baseUrl + "/logout", "GET", true)
   localStorage.clear()
-  const cookies = new Cookies()
-  cookies.remove("local_token")
+  new Cookies().remove("local_token")
   if (data?.msg) {
     return data.msg
   }

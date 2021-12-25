@@ -4,11 +4,11 @@ import { styled as muiStyled } from "@mui/material/styles"
 import Dropdown from "./Dropdown"
 import Button from "@mui/material/Button"
 import TextField from "@mui/material/TextField"
-import useQuery from "hooks/useRouteQuery"
+import useRouterQuery from "hooks/useRouteQuery"
 
 export default function SearchInput(props) {
   const { getSubmitedValue } = props
-  let query = useQuery()
+  let query = useRouterQuery()
   const [values, setValues] = useState({ input: "", genre: "", rating: "", orderBy: orderByList[0].value })
 
   const submitValue = (e) => {
