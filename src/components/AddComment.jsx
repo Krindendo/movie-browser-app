@@ -17,8 +17,8 @@ export default function AddComment({ handleChanged }) {
     setOpen(false)
   }
 
-  const handleSave = (input) => {
-    commentService.createComment({ movie_id: movieId, text: input })
+  const handleSave = async (input) => {
+    await commentService.createComment({ movie_id: movieId, text: input })
     setOpen(false)
     handleChanged()
   }

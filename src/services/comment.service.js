@@ -9,7 +9,7 @@ const createComment = async (body) => {
   return null
 }
 const getSingleComment = async (commentId) => {
-  const data = await api(`${baseUrl}/${commentId}`, "GET", true)
+  const data = await api(`${baseUrl}/${commentId}`, "GET", {}, true)
   if (data?.comment) {
     return data.comment
   }
@@ -23,7 +23,7 @@ const updateComment = async (commentId, body) => {
   return null
 }
 const deleteComment = async (commentId) => {
-  const data = await api(`${baseUrl}/${commentId}`, "DELETE", true)
+  const data = await api(`${baseUrl}/${commentId}`, "DELETE", {}, true)
   if (data?.msg) {
     return data.msg
   }

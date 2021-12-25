@@ -19,13 +19,13 @@ export default function CommentBox({ comment, handleChanged }) {
     setOpen(false)
   }
 
-  const handleEdit = (input) => {
-    commentService.updateComment(comment._id, { text: input })
+  const handleEdit = async (input) => {
+    await commentService.updateComment(comment._id, { text: input })
     handleChanged()
     setOpen(false)
   }
-  const handleDelete = () => {
-    commentService.deleteComment(comment._id)
+  const handleDelete = async () => {
+    await commentService.deleteComment(comment._id)
     handleChanged()
   }
 

@@ -8,12 +8,13 @@ export default function CommentPart({ comments, handleChanged }) {
   const { isLoggedIn, isUserHaveComment } = useAuth()
 
   useEffect(() => {
+    console.log("comments", comments)
     if (!isLoggedIn) {
       setShowAddCard(false)
       return
     }
     setShowAddCard(!isUserHaveComment(comments))
-  }, [isLoggedIn])
+  }, [comments, isLoggedIn])
 
   return (
     <>
