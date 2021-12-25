@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect } from "react"
+import { useState, useEffect } from "react"
 import CommentBox from "components/CommentBox"
 import AddComment from "components/AddComment"
 import useAuth from "hooks/useAuth"
@@ -7,7 +7,7 @@ export default function CommentPart({ comments, handleChanged }) {
   const [showAddCard, setShowAddCard] = useState(true)
   const { isLoggedIn, isUserHaveComment } = useAuth()
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!isLoggedIn) {
       setShowAddCard(false)
       return
