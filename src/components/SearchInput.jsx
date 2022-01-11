@@ -123,9 +123,7 @@ const TextFieldStyled = muiStyled(TextField)(() => ({
 
 const genreList = [
   { id: 0, name: "Svi", value: "default" },
-  { id: 1, name: "All", value: "All" },
-  { id: 2, name: "All", value: "All" },
-  { id: 3, name: "All", value: "All" }
+  { id: 1, name: "Domaći", value: "domaci" }
 ]
 
 const ratingList = [
