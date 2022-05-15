@@ -1,14 +1,14 @@
-import { Suspense, lazy } from "react"
-import styled from "styled-components"
-import { Route, Switch, Redirect } from "react-router-dom"
-import LoadingPage from "pages/public/Loading"
-import LandingPage from "pages/public/Landing"
-import LoginPage from "pages/account/Login"
-import RegisterPage from "pages/account/Register"
-import ActorPage from "pages/searchable/Actor"
-import BrowsePage from "pages/searchable/Browse"
-import MoviePage from "pages/searchable/movie/MoviePages"
-const SettingsPage = lazy(() => import("pages/protected/settings/Settings"))
+import { Suspense, lazy } from "react";
+import styled from "styled-components";
+import { Route, Switch, Redirect } from "react-router-dom";
+import LoadingPage from "pages/public/Loading";
+import LandingPage from "pages/public/Landing";
+import LoginPage from "pages/account/Login";
+import RegisterPage from "pages/account/Register";
+import ActorPage from "pages/searchable/Actor";
+import BrowsePage from "pages/searchable/Browse";
+import MoviePage from "pages/searchable/movie/MoviePages";
+const SettingsPage = lazy(() => import("pages/protected/settings/Settings"));
 
 export default function App() {
   return (
@@ -26,9 +26,9 @@ export default function App() {
         </Switch>
       </Suspense>
     </Container>
-  )
+  );
 }
 
 const Container = styled.div`
   background-color: #f5f5f5;
-`
+`;

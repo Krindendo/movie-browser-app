@@ -1,19 +1,19 @@
-import { useState, useEffect } from "react"
-import CommentBox from "components/CommentBox"
-import AddComment from "components/AddComment"
-import useAuth from "hooks/useAuth"
+import { useState, useEffect } from "react";
+import CommentBox from "components/CommentBox";
+import AddComment from "components/AddComment";
+import useAuth from "hooks/useAuth";
 
 export default function CommentPart({ comments, handleChanged }) {
-  const [showAddCard, setShowAddCard] = useState(true)
-  const { isLoggedIn, isUserHaveComment } = useAuth()
+  const [showAddCard, setShowAddCard] = useState(true);
+  const { isLoggedIn, isUserHaveComment } = useAuth();
 
   useEffect(() => {
     if (!isLoggedIn) {
-      setShowAddCard(false)
-      return
+      setShowAddCard(false);
+      return;
     }
-    setShowAddCard(!isUserHaveComment(comments))
-  }, [comments, isLoggedIn])
+    setShowAddCard(!isUserHaveComment(comments));
+  }, [comments, isLoggedIn]);
 
   return (
     <>
@@ -21,5 +21,5 @@ export default function CommentPart({ comments, handleChanged }) {
         comments.map((comment) => <CommentBox comment={comment} key={comment._id} handleChanged={handleChanged} />)}
       {showAddCard && <AddComment handleChanged={handleChanged} />}
     </>
-  )
+  );
 }

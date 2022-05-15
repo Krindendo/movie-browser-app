@@ -1,43 +1,43 @@
-import { useState, useEffect } from "react"
-import styled from "styled-components"
-import { useHistory, useLocation } from "react-router-dom"
-import authService from "services/auth.service"
-import { Link as LinkR } from "react-router-dom"
-import Button from "@mui/material/Button"
-import SearchInputNavbar from "components/SearchInputNavbar"
-import MenuIcon from "@mui/icons-material/Menu"
-import useWindowDimensions from "hooks/useWindowDimensions"
-import useAuth from "hooks/useAuth"
+import { useState, useEffect } from "react";
+import styled from "styled-components";
+import { useHistory, useLocation } from "react-router-dom";
+import authService from "services/auth.service";
+import { Link as LinkR } from "react-router-dom";
+import Button from "@mui/material/Button";
+import SearchInputNavbar from "components/SearchInputNavbar";
+import MenuIcon from "@mui/icons-material/Menu";
+import useWindowDimensions from "hooks/useWindowDimensions";
+import useAuth from "hooks/useAuth";
 
 export default function Header() {
-  const { isLoggedIn } = useAuth()
-  const [showNavbar, setShowNavbar] = useState(true)
-  const { width } = useWindowDimensions()
-  let history = useHistory()
-  let { pathname } = useLocation()
+  const { isLoggedIn } = useAuth();
+  const [showNavbar, setShowNavbar] = useState(true);
+  const { width } = useWindowDimensions();
+  let history = useHistory();
+  let { pathname } = useLocation();
 
   const handleLogout = async (event) => {
-    event.preventDefault()
-    const msg = await authService.logout()
+    event.preventDefault();
+    const msg = await authService.logout();
     if (msg) {
-      history.push("/")
+      history.push("/");
     }
-  }
+  };
 
   useEffect(() => {
     if (width >= 830) {
-      setShowNavbar(false)
+      setShowNavbar(false);
     }
-  }, [width])
+  }, [width]);
 
   const handleShow = (event) => {
-    event.preventDefault()
-    setShowNavbar((prev) => !prev)
-  }
+    event.preventDefault();
+    setShowNavbar((prev) => !prev);
+  };
 
   useEffect(() => {
-    setShowNavbar(false)
-  }, [pathname])
+    setShowNavbar(false);
+  }, [pathname]);
 
   return (
     <Container showNavbar={showNavbar}>
@@ -60,7 +60,7 @@ export default function Header() {
         )}
       </Content>
     </Container>
-  )
+  );
 }
 
 const Container = styled.header`
@@ -75,7 +75,7 @@ const Container = styled.header`
   background-color: #082032;
   padding: 0 32px;
   z-index: 10;
-`
+`;
 
 const Link = styled(LinkR)`
   color: #fff;
@@ -85,12 +85,12 @@ const Link = styled(LinkR)`
   padding: 0 1rem;
   height: 100%;
   cursor: pointer;
-`
+`;
 
 const Title = styled(LinkR)`
   color: white;
   font-size: 1.2rem;
-`
+`;
 
 const Bars = styled(MenuIcon)`
   display: none !important;
@@ -102,7 +102,7 @@ const Bars = styled(MenuIcon)`
     transform: translate(-100%, 50%);
     cursor: pointer;
   }
-`
+`;
 
 const Content = styled.nav`
   display: flex;
@@ -112,4 +112,4 @@ const Content = styled.nav`
   @media screen and (max-width: 830px) {
     display: ${(props) => (props.showNavbar ? "flex" : "none")};
   }
-`
+`;

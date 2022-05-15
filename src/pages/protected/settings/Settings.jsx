@@ -1,10 +1,12 @@
-import styled from "styled-components"
-import Layout from "layout/Layout"
+import styled from "styled-components";
+import Layout from "layout/Layout";
 
 export default function Settings() {
+  //TODO: Add, modify, delete movies
+  //TODO: Add new actors
   return (
     <Layout>
-      <p>Settings</p>
+      <h1>Settings</h1>
     </Layout>
-  )
+  );
 }

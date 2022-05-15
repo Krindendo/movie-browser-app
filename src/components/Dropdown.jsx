@@ -1,17 +1,17 @@
-import { useState } from "react"
-import styled from "styled-components"
-import { styled as muiStyled } from "@mui/material/styles"
-import InputLabel from "@mui/material/InputLabel"
-import MenuItem from "@mui/material/MenuItem"
-import Select from "@mui/material/Select"
+import { useState } from "react";
+import styled from "styled-components";
+import { styled as muiStyled } from "@mui/material/styles";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
 
 export default function Dropdown(props) {
-  const { id, title, list, submitValue } = props
-  const [select, setSelect] = useState(list[0].value)
+  const { id, title, list, submitValue } = props;
+  const [select, setSelect] = useState(list[0].value);
   const handleChange = (event) => {
-    setSelect(event.target.value)
-    submitValue(event)
-  }
+    setSelect(event.target.value);
+    submitValue(event);
+  };
   return (
     <Container>
       <InputLabel style={{ color: "white" }} id={id}>
@@ -25,9 +25,9 @@ export default function Dropdown(props) {
         ))}
       </SelectStyled>
     </Container>
-  )
+  );
 }
-const Container = styled.div``
+const Container = styled.div``;
 
 const SelectStyled = muiStyled(Select)(() => ({
   width: "200px",
@@ -45,4 +45,4 @@ const SelectStyled = muiStyled(Select)(() => ({
       borderColor: "white !important"
     }
   }
-}))
+}));

@@ -1,33 +1,33 @@
-import { useState } from "react"
-import Box from "./Box"
-import styled from "styled-components"
-import { formatDate } from "helper/formatDate"
-import CloseIcon from "@mui/icons-material/Close"
-import EditIcon from "@mui/icons-material/Edit"
-import { commentService } from "services/comment.service"
-import AddCommentDialog from "./AddCommentDialog"
-import useAuth from "hooks/useAuth"
+import { useState } from "react";
+import Box from "./Box";
+import styled from "styled-components";
+import { formatDate } from "helper/formatDate";
+import CloseIcon from "@mui/icons-material/Close";
+import EditIcon from "@mui/icons-material/Edit";
+import { commentService } from "services/comment.service";
+import AddCommentDialog from "./AddCommentDialog";
+import useAuth from "hooks/useAuth";
 
 export default function CommentBox({ comment, handleChanged }) {
-  const [open, setOpen] = useState(false)
-  const { isUserHaveComment } = useAuth()
+  const [open, setOpen] = useState(false);
+  const { isUserHaveComment } = useAuth();
 
   const handleOpenDialog = () => {
-    setOpen(true)
-  }
+    setOpen(true);
+  };
   const handleCloseDialog = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   const handleEdit = async (input) => {
-    await commentService.updateComment(comment._id, { text: input })
-    handleChanged()
-    setOpen(false)
-  }
+    await commentService.updateComment(comment._id, { text: input });
+    handleChanged();
+    setOpen(false);
+  };
   const handleDelete = async () => {
-    await commentService.deleteComment(comment._id)
-    handleChanged()
-  }
+    await commentService.deleteComment(comment._id);
+    handleChanged();
+  };
 
   if (comment) {
     return (
@@ -45,22 +45,22 @@ export default function CommentBox({ comment, handleChanged }) {
         </StyledBox>
         <AddCommentDialog open={open} handleClose={handleCloseDialog} handleClick={handleEdit} />
       </>
-    )
+    );
   }
-  return <></>
+  return <></>;
 }
 
 const StyledBox = styled(Box)`
   width: 275px;
   position: relative;
-`
+`;
 const Text = styled.p`
   margin: 0;
-`
+`;
 const SubText = styled.p`
   margin: 0;
   font-weight: 600;
-`
+`;
 const EditIconStyled = styled(EditIcon)`
   position: absolute;
   right: 36px;
@@ -74,7 +74,7 @@ const EditIconStyled = styled(EditIcon)`
     border-radius: 50%;
     color: white;
   }
-`
+`;
 
 const CloseIconStyled = styled(CloseIcon)`
   position: absolute;
@@ -89,4 +89,4 @@ const CloseIconStyled = styled(CloseIcon)`
     border-radius: 50%;
     color: white;
   }
-`
+`;

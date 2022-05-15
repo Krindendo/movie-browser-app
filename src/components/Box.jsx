@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 const Box = styled.div`
   width: 100%;
@@ -14,6 +14,6 @@ const Box = styled.div`
   &:focus {
     outline: 1px solid #ff4c29;
   }
-`
+`;
 
-export default Box
+export default Box;

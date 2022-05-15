@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react"
-import styled, { keyframes } from "styled-components"
+import { useState, useEffect } from "react";
+import styled, { keyframes } from "styled-components";
 
 const StyledRipple = styled.span`
   opacity: 0.3;
@@ -7,7 +7,7 @@ const StyledRipple = styled.span`
   animation-name: "";
   animation-duration: 550ms;
   animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-`
+`;
 const StyledRippleChiled = styled.span`
   opacity: 1;
   display: block;
@@ -20,7 +20,7 @@ const StyledRippleChiled = styled.span`
   animation-name: ${exitKeyframe};
   animation-duration: 550ms;
   animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-`
+`;
 
 const enterKeyFrame = keyframes`
 
@@ -33,7 +33,7 @@ const enterKeyFrame = keyframes`
   transform: scale(1);
   opacity: 0.3;
 }
-`
+`;
 
 const exitKeyframe = keyframes`
 0% {
@@ -43,7 +43,7 @@ const exitKeyframe = keyframes`
 100% {
   opacity: 0;
 }
-`
+`;
 
 const pulsateKeyframe = keyframes`
 0% {
@@ -57,36 +57,36 @@ const pulsateKeyframe = keyframes`
 100% {
   transform: scale(1);
 }
-`
+`;
 
 export default function Ripple(props) {
-  const [leaving, setLeaving] = useState(false)
-  const { pulsate = false, rippleX, rippleY, rippleSize, in: inProp, onExited, timeout } = props
+  const [leaving, setLeaving] = useState(false);
+  const { pulsate = false, rippleX, rippleY, rippleSize, in: inProp, onExited, timeout } = props;
   const rippleStyles = {
     width: rippleSize,
     height: rippleSize,
     top: -(rippleSize / 2) + rippleY,
     left: -(rippleSize / 2) + rippleX
-  }
+  };
 
   if (!inProp && !leaving) {
-    setLeaving(true)
+    setLeaving(true);
   }
 
   useEffect(() => {
     if (!inProp && onExited != null) {
-      const timeoutId = setTimeout(onExited, timeout)
+      const timeoutId = setTimeout(onExited, timeout);
       return () => {
-        clearTimeout(timeoutId)
-      }
+        clearTimeout(timeoutId);
+      };
     }
 
-    return undefined
-  }, [onExited, inProp, timeout])
+    return undefined;
+  }, [onExited, inProp, timeout]);
 
   return (
     <StyledRipple style={rippleStyles}>
       <StyledRippleChiled />
     </StyledRipple>
-  )
+  );
 }

@@ -1,7 +1,7 @@
-import MovieCard from "components/MovieCard"
+import MovieCard from "components/MovieCard";
 
 export default function ListOfMovies(props) {
-  const { movies } = props
+  const { movies } = props;
   if (movies) {
     return (
       <>
@@ -9,12 +9,12 @@ export default function ListOfMovies(props) {
           <MovieCard key={movie._id} id={movie._id} title={movie.title} subtitle={movie.plot} year={movie.year} />
         ))}
       </>
-    )
+    );
   }
 
   return (
     <>
       <p>Nema filmova</p>
     </>
-  )
+  );
 }

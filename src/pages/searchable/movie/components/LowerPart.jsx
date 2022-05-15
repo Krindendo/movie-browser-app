@@ -1,5 +1,5 @@
-import styled from "styled-components"
-import { Link } from "react-router-dom"
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export default function LowerPart({ movie }) {
   return (
@@ -22,7 +22,7 @@ export default function LowerPart({ movie }) {
         </div>
       </GroupOfPeoples>
     </>
-  )
+  );
 }
 
 const Fullplot = styled.p`
@@ -35,33 +35,33 @@ const Fullplot = styled.p`
     font-size: 1.2rem;
     font-weight: 700;
   }
-`
+`;
 
 const GroupOfPeoples = styled.div`
   display: flex;
   justify-content: center;
   width: 50%;
   gap: 4em;
-`
+`;
 const Title = styled.p`
   font-weight: 700;
   font-size: 1.2rem;
   margin: 0;
   letter-spacing: 1px;
-`
+`;
 const Text = styled.p`
   color: var(--secundary-link-color);
   font-weight: 500;
-`
+`;
 const TextInLink = styled(Link)`
   color: var(--secundary-link-color);
   font-weight: 500;
-`
+`;
 
 const List = styled.ul`
   list-style-type: none;
   padding: 0;
-`
+`;
 const Item = styled.li`
   margin: 0.5em 0;
-`
+`;

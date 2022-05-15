@@ -1,79 +1,69 @@
-import { useEffect, useState } from "react"
-import styled from "styled-components"
-import Layout from "layout/Layout"
-import { useParams } from "react-router-dom"
-import { actorService } from "services/actor.service"
-import ListOfMovies from "components/ListOfMovies"
-import Loading from "pages/public/Loading"
+import styled from "styled-components";
+import useGetActor from "hooks/actorService/useGetActor";
+import Layout from "layout/Layout";
+import { useParams } from "react-router-dom";
+import ListOfMovies from "components/ListOfMovies";
+import Loading from "pages/public/Loading";
 
 export default function Actor() {
-  const [actor, setActor] = useState()
-  const { actorId } = useParams()
+  const { actorId } = useParams();
+  const { isLoading, error, data: actor, isFetching } = useGetActor(actorId);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const actor = await actorService.getActor(actorId)
-      if (actor) {
-        setActor(actor)
-      }
-    }
-    fetchData()
-  }, [actorId])
-
-  if (actor) {
-    return (
-      <Layout>
-        <Container>
-          <Content>
-            <TopSection>
-              <div style={{ marginLeft: "20px" }}>
-                <Name>{actor.name}</Name>
-                <Date>Rodjen: {actor.dateFormated}</Date>
-                <Wrapper>
-                  <p>Zanimanje:</p>
-                  <List>
-                    {actor.professions.map((profession, i) => (
-                      <li key={i}>
-                        <p>{profession}</p>
-                      </li>
-                    ))}
-                  </List>
-                </Wrapper>
-              </div>
-            </TopSection>
-
-            <MiddleSection>
-              <img src={actor.image} alt={actor.name} height="280px" />
-
-              <Biography>{actor.biography}</Biography>
-            </MiddleSection>
-            <BottomSection>
-              <h4>Uloge u filmovima: </h4>
-              <FilmContainer>
-                <ListOfMovies movies={actor.movies} />
-              </FilmContainer>
-            </BottomSection>
-          </Content>
-        </Container>
-      </Layout>
-    )
+  if (isLoading) {
+    return <Loading />;
   }
 
-  return <Loading />
+  return (
+    <Layout>
+      <Container>
+        <Content>
+          <TopSection>
+            <div style={{ marginLeft: "20px" }}>
+              <Name>{actor.name}</Name>
+              <Date>Rodjen: {actor.dateFormated}</Date>
+              <Wrapper>
+                <p>Zanimanje:</p>
+                <List>
+                  {actor.professions.map((profession, i) => (
+                    <li key={i}>
+                      <p>{profession}</p>
+                    </li>
+                  ))}
+                </List>
+              </Wrapper>
+            </div>
+          </TopSection>
+
+          <MiddleSection>
+            <img src={actor.image} alt={actor.name} height="280px" />
+            <Biography>{actor.biography}</Biography>
+          </MiddleSection>
+
+          <BottomSection>
+            <h4>Uloge u filmovima: </h4>
+            <FilmContainer>
+              <ListOfMovies movies={actor.movies} />
+            </FilmContainer>
+          </BottomSection>
+        </Content>
+      </Container>
+    </Layout>
+  );
 }
+
 const Container = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 2rem;
-`
+`;
 const Content = styled.div`
   max-width: 1000px;
-`
+`;
 const TopSection = styled.div`
   display: flex;
   justify-content: center;
-`
+`;
 const MiddleSection = styled.div`
   margin-top: 4rem;
   display: flex;
@@ -83,21 +73,21 @@ const MiddleSection = styled.div`
   @media only screen and (max-width: 830px) {
     flex-direction: column;
   }
-`
+`;
 const BottomSection = styled.div`
   margin-top: 4rem;
-`
+`;
 
 const Name = styled.h1`
   margin: 0;
   font-size: 2.3rem;
-`
+`;
 const Date = styled.h4`
   margin: 0;
   color: var(--secundary-text-color);
   font-weight: 400;
   margin-top: 5px;
-`
+`;
 
 const Wrapper = styled.div`
   display: flex;
@@ -109,17 +99,17 @@ const Wrapper = styled.div`
     margin: 0;
     color: var(--secundary-text-color);
   }
-`
+`;
 const List = styled.ul`
   margin: 0;
   padding: 0;
   display: flex;
   gap: 5px;
-`
+`;
 
 const Biography = styled.p`
   width: min(100%, 75ch);
-`
+`;
 
 const FilmContainer = styled.section`
   display: grid;
@@ -136,4 +126,4 @@ const FilmContainer = styled.section`
   @media only screen and (max-width: 650px) {
     grid-template-columns: 275px;
   }
-`
+`;

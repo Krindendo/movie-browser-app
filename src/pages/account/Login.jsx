@@ -1,31 +1,33 @@
-import styled from "styled-components"
-import Layout from "layout/Layout"
+import styled from "styled-components";
+import Layout from "layout/Layout";
 
-import Avatar from "@mui/material/Avatar"
-import Button from "@mui/material/Button"
-import TextField from "@mui/material/TextField"
-import Box from "@mui/material/Box"
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined"
-import Typography from "@mui/material/Typography"
-import Container from "@mui/material/Container"
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
 
-import { useForm } from "react-hook-form"
-import { Link, useHistory } from "react-router-dom"
-import authService from "services/auth.service"
+import { useForm } from "react-hook-form";
+import { Link, useHistory } from "react-router-dom";
+import authService from "services/auth.service";
 
 export default function Login() {
+  const history = useHistory();
+
   const {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm()
-  let history = useHistory()
+  } = useForm();
+
   const onSubmit = async (data) => {
-    const user = await authService.login(data)
+    const user = await authService.login(data);
     if (user) {
-      history.push("/")
+      history.push("/");
     }
-  }
+  };
 
   return (
     <Layout>
@@ -81,13 +83,13 @@ export default function Login() {
         </Box>
       </Container>
     </Layout>
-  )
+  );
 }
 
 const Register = styled.div`
   display: flex;
   justify-content: flex-end;
-`
+`;
 const LinkStyled = styled(Link)`
   color: var(--primary-dark-color);
-`
+`;

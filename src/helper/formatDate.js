@@ -11,12 +11,12 @@ const months = [
   "oktobar",
   "novembar",
   "decembar"
-]
+];
 
 export const formatDate = (date) => {
   if (date) {
-    return `${date.getDate()}. ${months[date.getMonth()]} ${date.getFullYear()}.`
+    return `${date.getDate()}. ${months[date.getMonth()]} ${date.getFullYear()}.`;
   } else {
-    return "00.00.0000"
+    return "00.00.0000";
   }
-}
+};

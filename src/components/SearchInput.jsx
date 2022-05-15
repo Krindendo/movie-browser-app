@@ -1,48 +1,48 @@
-import { useState, useEffect } from "react"
-import styled from "styled-components"
-import { styled as muiStyled } from "@mui/material/styles"
-import Dropdown from "./Dropdown"
-import Button from "@mui/material/Button"
-import TextField from "@mui/material/TextField"
-import useRouterQuery from "hooks/useRouteQuery"
+import { useState, useEffect } from "react";
+import styled from "styled-components";
+import { styled as muiStyled } from "@mui/material/styles";
+import Dropdown from "./Dropdown";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import useRouterQuery from "hooks/useRouteQuery";
 
 export default function SearchInput(props) {
-  const { getSubmitedValue } = props
-  let query = useRouterQuery()
-  const [values, setValues] = useState({ input: "", genre: "", rating: "", orderBy: orderByList[0].value })
+  const { getSubmitedValue } = props;
+  let query = useRouterQuery();
+  const [values, setValues] = useState({ input: "", genre: "", rating: "", orderBy: orderByList[0].value });
 
   const submitValue = (e) => {
-    const { name, value } = e.target
-    setValues((inputs) => ({ ...inputs, [name]: value }))
-  }
+    const { name, value } = e.target;
+    setValues((inputs) => ({ ...inputs, [name]: value }));
+  };
 
   const handleSubmit = () => {
-    let { input, genre, rating, orderBy } = values
-    let titleSort, releasedSort
+    let { input, genre, rating, orderBy } = values;
+    let titleSort, releasedSort;
     if (orderBy === "najnoviji") {
-      releasedSort = "desc"
+      releasedSort = "desc";
     }
     if (orderBy === "najstariji") {
-      releasedSort = "asc"
+      releasedSort = "asc";
     }
     if (orderBy === "abecedno") {
-      titleSort = "asc"
+      titleSort = "asc";
     }
     if (rating === "default") {
-      rating = ""
+      rating = "";
     }
     if (genre === "default") {
-      genre = ""
+      genre = "";
     }
-    getSubmitedValue({ title: input, rating: rating, titleSort, releasedSort, skip: null })
-  }
+    getSubmitedValue({ title: input, rating: rating, titleSort, releasedSort, skip: null });
+  };
 
   useEffect(() => {
-    let title = query.get("title")
+    let title = query.get("title");
     if (title) {
-      setValues((inputs) => ({ ...inputs, input: title }))
+      setValues((inputs) => ({ ...inputs, input: title }));
     }
-  }, [query])
+  }, [query]);
 
   return (
     <Container>
@@ -89,27 +89,27 @@ export default function SearchInput(props) {
         />
       </BottomPart>
     </Container>
-  )
+  );
 }
 
 const Container = styled.div`
   width: 700px;
   margin-bottom: 1em;
-`
+`;
 const Title = styled.h2`
   color: white;
-`
+`;
 const UpperPart = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`
+`;
 const BottomPart = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 1em 12px 1em 0;
-`
+`;
 const TextFieldStyled = muiStyled(TextField)(() => ({
   "& .MuiOutlinedInput-notchedOutline": {
     borderColor: "white"
@@ -119,12 +119,12 @@ const TextFieldStyled = muiStyled(TextField)(() => ({
       borderColor: "white !important"
     }
   }
-}))
+}));
 
 const genreList = [
   { id: 0, name: "Svi", value: "default" },
   { id: 1, name: "Domaći", value: "domaci" }
-]
+];
 
 const ratingList = [
   { id: 0, name: "Svi", value: "default" },
@@ -136,10 +136,10 @@ const ratingList = [
   { id: 6, name: "4+", value: "4" },
   { id: 7, name: "3+", value: "3" },
   { id: 8, name: "2+", value: "2" }
-]
+];
 
 const orderByList = [
   { id: 0, name: "Najnoviji", value: "najnoviji" },
   { id: 1, name: "Najstariji", value: "najstariji" },
   { id: 2, name: "Abecedno", value: "abecedno" }
-]
+];

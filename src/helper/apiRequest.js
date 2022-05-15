@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios from "axios";
 
 const api = async (url, method, body, withCredentials = false) => {
   try {
@@ -7,15 +7,15 @@ const api = async (url, method, body, withCredentials = false) => {
       method,
       data: body,
       withCredentials
-    })
+    });
     if (process.env.NODE_ENV === "development") {
-      console.log("Axios data", data)
+      console.log("Axios data", data);
     }
-    return data
+    return data;
   } catch (error) {
-    console.log("error", error.response)
-    return null
+    console.log("error", error.response);
+    return null;
   }
-}
+};
 
-export default api
+export default api;

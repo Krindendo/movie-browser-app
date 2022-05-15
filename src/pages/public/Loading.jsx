@@ -1,5 +1,5 @@
-import styled from "styled-components"
-import CircularProgress from "@mui/material/CircularProgress"
+import styled from "styled-components";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export default function Loading() {
   return (
@@ -7,7 +7,7 @@ export default function Loading() {
       <Text>Učitavanje </Text>
       <CircularProgress size="1.5rem" />
     </Container>
-  )
+  );
 }
 
 const Container = styled.section`
@@ -18,7 +18,7 @@ const Container = styled.section`
   height: 100vh;
   background-color: #e9e9e9;
   gap: 1rem;
-`
+`;
 const Text = styled.p`
   font-size: 1.5rem;
-`
+`;

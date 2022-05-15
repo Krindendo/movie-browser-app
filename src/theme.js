@@ -1,5 +1,5 @@
-import { createTheme } from "@mui/material/styles"
-import { red } from "@mui/material/colors"
+import { createTheme } from "@mui/material/styles";
+import { red } from "@mui/material/colors";
 
 // A custom theme for this app
 const theme = createTheme({
@@ -16,9 +16,9 @@ const theme = createTheme({
       main: red.A400
     }
   }
-})
+});
 
-export default theme
+export default theme;
 
 // #082032 primary
 // #2C394B

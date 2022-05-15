@@ -1,27 +1,27 @@
-import { useState } from "react"
-import Box from "./Box"
-import styled from "styled-components"
-import AddIcon from "@mui/icons-material/Add"
-import AddCommentDialog from "./AddCommentDialog"
-import { commentService } from "services/comment.service"
-import { useParams } from "react-router-dom"
+import { useState } from "react";
+import Box from "./Box";
+import styled from "styled-components";
+import AddIcon from "@mui/icons-material/Add";
+import AddCommentDialog from "./AddCommentDialog";
+import { commentService } from "services/comment.service";
+import { useParams } from "react-router-dom";
 
 export default function AddComment({ handleChanged }) {
-  let { movieId } = useParams()
-  const [open, setOpen] = useState(false)
+  let { movieId } = useParams();
+  const [open, setOpen] = useState(false);
 
   const handleOpenDialog = () => {
-    setOpen(true)
-  }
+    setOpen(true);
+  };
   const handleCloseDialog = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   const handleSave = async (input) => {
-    await commentService.createComment({ movie_id: movieId, text: input })
-    setOpen(false)
-    handleChanged()
-  }
+    await commentService.createComment({ movie_id: movieId, text: input });
+    setOpen(false);
+    handleChanged();
+  };
 
   return (
     <>
@@ -31,7 +31,7 @@ export default function AddComment({ handleChanged }) {
       </StyledBox>
       <AddCommentDialog open={open} handleClose={handleCloseDialog} handleClick={handleSave} />
     </>
-  )
+  );
 }
 
 const StyledBox = styled(Box)`
@@ -40,14 +40,14 @@ const StyledBox = styled(Box)`
   align-items: center;
   gap: 1rem;
   width: 275px;
-`
+`;
 const AddIconStyled = styled(AddIcon)`
   width: 1.4em !important;
   height: 1.4em !important;
   color: var(--secondary-color);
-`
+`;
 const Text = styled.p`
   color: var(--secondary-color);
   font-size: 1.1rem;
   font-weight: 500;
-`
+`;

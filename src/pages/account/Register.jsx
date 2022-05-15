@@ -1,35 +1,36 @@
-import { useState } from "react"
-import styled from "styled-components"
-import Layout from "layout/Layout"
+import { useState } from "react";
+import styled from "styled-components";
+import Layout from "layout/Layout";
 
-import Avatar from "@mui/material/Avatar"
-import Button from "@mui/material/Button"
-import TextField from "@mui/material/TextField"
-import FormControlLabel from "@mui/material/FormControlLabel"
-import Checkbox from "@mui/material/Checkbox"
-import Box from "@mui/material/Box"
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined"
-import Typography from "@mui/material/Typography"
-import Container from "@mui/material/Container"
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
 
-import { useForm } from "react-hook-form"
-import { Link, useHistory } from "react-router-dom"
-import authService from "services/auth.service"
+import { useForm } from "react-hook-form";
+import { Link, useHistory } from "react-router-dom";
+import authService from "services/auth.service";
 
 export default function Register() {
-  const [showPassword, setShotPassword] = useState(false)
+  const history = useHistory();
+  const [showPassword, setShotPassword] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm()
-  let history = useHistory()
+  } = useForm();
+
   const onSubmit = async (data) => {
-    const user = await authService.register(data)
+    const user = await authService.register(data);
     if (user) {
-      history.push("/")
+      history.push("/");
     }
-  }
+  };
 
   return (
     <Layout>
@@ -108,13 +109,13 @@ export default function Register() {
         </Box>
       </Container>
     </Layout>
-  )
+  );
 }
 
 const Login = styled.div`
   display: flex;
   justify-content: flex-end;
-`
+`;
 const LinkStyled = styled(Link)`
   color: var(--primary-dark-color);
-`
+`;
