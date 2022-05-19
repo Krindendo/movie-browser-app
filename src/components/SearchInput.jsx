@@ -4,53 +4,25 @@ import { styled as muiStyled } from "@mui/material/styles";
 import Dropdown from "./Dropdown";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import useRouterQuery from "hooks/useRouteQuery";
 
 export default function SearchInput(props) {
-  const { getSubmitedValue } = props;
-  let query = useRouterQuery();
-  const [values, setValues] = useState({ input: "", genre: "", rating: "", orderBy: orderByList[0].value });
-
-  const submitValue = (e) => {
-    const { name, value } = e.target;
-    setValues((inputs) => ({ ...inputs, [name]: value }));
-  };
-
-  const handleSubmit = () => {
-    let { input, genre, rating, orderBy } = values;
-    let titleSort, releasedSort;
-    if (orderBy === "najnoviji") {
-      releasedSort = "desc";
-    }
-    if (orderBy === "najstariji") {
-      releasedSort = "asc";
-    }
-    if (orderBy === "abecedno") {
-      titleSort = "asc";
-    }
-    if (rating === "default") {
-      rating = "";
-    }
-    if (genre === "default") {
-      genre = "";
-    }
-    getSubmitedValue({ title: input, rating: rating, titleSort, releasedSort, skip: null });
-  };
-
-  useEffect(() => {
-    let title = query.get("title");
-    if (title) {
-      setValues((inputs) => ({ ...inputs, input: title }));
-    }
-  }, [query]);
+  const {
+    input = "",
+    handleInput,
+    handleGenre,
+    handleRating,
+    orderBy = orderByList[0].value,
+    handleOrderBy,
+    handleSubmit
+  } = props;
 
   return (
     <Container>
       <Title>Pretraga</Title>
       <UpperPart>
         <TextFieldStyled
-          value={values.input}
-          onChange={submitValue}
+          value={input}
+          onChange={handleInput}
           name="input"
           color="secondary"
           variant="outlined"
@@ -69,7 +41,7 @@ export default function SearchInput(props) {
           list={genreList}
           color="secondary"
           styled={{ minWidth: "120px" }}
-          submitValue={submitValue}
+          submitValue={handleGenre}
         />
         <Dropdown
           id="rating"
@@ -77,7 +49,7 @@ export default function SearchInput(props) {
           list={ratingList}
           color="secondary"
           styled={{ minWidth: "120px" }}
-          submitValue={submitValue}
+          submitValue={handleRating}
         />
         <Dropdown
           id="orderBy"
@@ -85,7 +57,7 @@ export default function SearchInput(props) {
           list={orderByList}
           color="secondary"
           styled={{ minWidth: "120px" }}
-          submitValue={submitValue}
+          submitValue={handleOrderBy}
         />
       </BottomPart>
     </Container>
