@@ -2,8 +2,12 @@ import api from "helper/apiRequest";
 import Cookies from "universal-cookie";
 const baseUrl = "/api/v1/auth";
 
-const register = async (body) => {
-  // name, email, password
+const register = async ({ name, email, password }) => {
+  const body = {
+    name,
+    email,
+    password
+  };
   const data = await api(baseUrl + "/register", "POST", body, true);
   if (data?.user) {
     saveUser(data.user);
@@ -11,8 +15,11 @@ const register = async (body) => {
   }
   return null;
 };
-const login = async (body) => {
-  // email, password
+const login = async ({ email, password }) => {
+  const body = {
+    email,
+    password
+  };
   const data = await api(baseUrl + "/login", "POST", body, true);
   if (data?.user) {
     saveUser(data.user);

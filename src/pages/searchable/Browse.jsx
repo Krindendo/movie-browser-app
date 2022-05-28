@@ -36,7 +36,12 @@ export default function Browse() {
     data: movies,
     isFetching,
     refetch
-  } = useGetMovies(output.current.input, output.current.rating, output.current.titleSort, output.current.releasedSort);
+  } = useGetMovies({
+    title: output.current.input,
+    rating: output.current.rating,
+    titleSort: output.current.titleSort,
+    releasedSort: output.current.releasedSort
+  });
 
   const handleSubmit = () => {
     output.current.input = input;

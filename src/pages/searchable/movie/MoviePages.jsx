@@ -15,8 +15,13 @@ export default function MoviePages() {
   const [isCommentsChanged, setIsCommentsChanged] = useState(0);
   const { movieId } = useParams();
 
-  const { isLoading: isMovieLoading, error: movieError, data: movie } = useGetMovie(movieId);
-  const { isLoading: isCommentsLoading, error: commentsError, data: comments } = useGetMovieComments(movieId);
+  const { isLoading: isMovieLoading, isError: isMovieError, error: movieError, data: movie } = useGetMovie({ movieId });
+  const {
+    isLoading: isCommentsLoading,
+    isError: isCommentError,
+    error: commentsError,
+    data: comments
+  } = useGetMovieComments({ movieId });
 
   const handleChanged = () => {
     setIsCommentsChanged((prevValue) => prevValue + 1);
@@ -24,6 +29,10 @@ export default function MoviePages() {
 
   if (isMovieLoading || isCommentsLoading) {
     return <Loading />;
+  }
+
+  if (isMovieError || isCommentError) {
+    return <div>Greska</div>;
   }
 
   return (

@@ -2,7 +2,7 @@ import api from "helper/apiRequest";
 import { formatDate } from "helper/formatDate";
 const baseUrl = "/api/v1/movie";
 
-const getMovies = async (title, rating, titleSort, releasedSort, skip) => {
+const getMovies = async ({ title, rating, titleSort, releasedSort, skip }) => {
   let content = [];
   let apiCall = "";
   if (title) {
@@ -39,7 +39,7 @@ const getMovies = async (title, rating, titleSort, releasedSort, skip) => {
   }
   return [];
 };
-const getMovie = async (movieId) => {
+const getMovie = async ({ movieId }) => {
   const data = await api(baseUrl + `/${movieId}`, "GET");
   if (data?.movie) {
     data.movie.dateFormated = formatDate(new Date(data.movie.released.slice(0, -1)));
@@ -47,7 +47,7 @@ const getMovie = async (movieId) => {
   }
   return null;
 };
-const getMovieComments = async (movieId) => {
+const getMovieComments = async ({ movieId }) => {
   const data = await api(baseUrl + `/${movieId}/comments`, "GET");
   if (data?.comments) {
     return data.comments;

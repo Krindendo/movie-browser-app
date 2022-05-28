@@ -1,26 +1,27 @@
 import { useMutation, queryCache } from "react-query";
 import commentService from "services/comment.service.js";
+import { COMMENT_CONSTANT } from "./constants";
 
-export default function useUpdateComment() {
-  return useMutation((newComment) => commentService.updateComment(newComment), {
-    onMutate: (newComment) => {
-      queryCache.setQueryData(["comments", newComment.id], newComment);
+export default function useUpdateComment({ comment }) {
+  return useMutation(() => commentService.updateComment({ comment }), {
+    onMutate: (comment) => {
+      queryCache.setQueryData([COMMENT_CONSTANT, comment.id], comment);
     },
-    onSuccess: (newComment) => {
-      queryCache.setQueryData(["comments", newComment.id], newComment);
+    onSuccess: (comment) => {
+      queryCache.setQueryData([COMMENT_CONSTANT, comment.id], comment);
 
-      if (queryCache.getQueryData("comments")) {
-        queryCache.setQueryData("comments", (old) => {
+      if (queryCache.getQueryData(COMMENT_CONSTANT)) {
+        queryCache.setQueryData(COMMENT_CONSTANT, (old) => {
           return old.map((d) => {
-            if (d.id === newComment.id) {
-              return newComment;
+            if (d.id === comment.id) {
+              return comment;
             }
             return d;
           });
         });
       } else {
-        queryCache.setQueryData("comments", [newComment]);
-        queryCache.invalidateQueries("comments");
+        queryCache.setQueryData(COMMENT_CONSTANT, [comment]);
+        queryCache.invalidateQueries(COMMENT_CONSTANT);
       }
     }
   });

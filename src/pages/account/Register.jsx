@@ -26,7 +26,7 @@ export default function Register() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    const user = await authService.register(data);
+    const user = await authService.register({ ...data });
     if (user) {
       history.push("/");
     }

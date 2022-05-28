@@ -5,7 +5,7 @@ import ListOfMovies from "components/ListOfMovies";
 import undrawSvg from "assets/svg/undraw_horror_movie_3988.svg";
 
 export default function Landing() {
-  const { isLoading, error, data: movies, isFetching } = useGetMovies();
+  const { isLoading, error, data: movies, isFetching } = useGetMovies({ enabled: true });
 
   return (
     <Layout>

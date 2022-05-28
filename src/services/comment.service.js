@@ -1,28 +1,40 @@
 import api from "helper/apiRequest";
 const baseUrl = "/api/v1/comment";
 
-const createComment = async (body) => {
+const createComment = async ({ name, movieId: movie_id, user_id, text }) => {
+  const body = {
+    name,
+    movie_id,
+    user_id,
+    text
+  };
   const data = await api(baseUrl + "/", "POST", body, true);
   if (data?.comment) {
     return data.comment;
   }
   return null;
 };
-const getComment = async (commentId) => {
+const getComment = async ({ commentId }) => {
   const data = await api(`${baseUrl}/${commentId}`, "GET", {}, true);
   if (data?.comment) {
     return data.comment;
   }
   return null;
 };
-const updateComment = async (commentId, body) => {
+const updateComment = async ({ commentId, name, movieId: movie_id, user_id, text }) => {
+  const body = {
+    name,
+    movie_id,
+    user_id,
+    text
+  };
   const data = await api(`${baseUrl}/${commentId}`, "PATCH", body, true);
   if (data?.comment) {
     return data.comment;
   }
   return null;
 };
-const deleteComment = async (commentId) => {
+const deleteComment = async ({ commentId }) => {
   const data = await api(`${baseUrl}/${commentId}`, "DELETE", {}, true);
   if (data?.msg) {
     return data.msg;

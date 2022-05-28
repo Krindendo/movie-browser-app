@@ -9,7 +9,7 @@ const getActors = async () => {
   }
   return [];
 };
-const getActor = async (actorId) => {
+const getActor = async ({ actorId }) => {
   const data = await api(baseUrl + `/${actorId}`, "GET");
   if (data?.actor) {
     data.actor.dateFormated = formatDate(new Date(data.actor.born_date.slice(0, -1)));
@@ -20,7 +20,7 @@ const getActor = async (actorId) => {
   }
   return null;
 };
-const createActor = async (body) => {
+const createActor = async ({ body }) => {
   const data = await api("/", "POST", body);
   if (data?.actor) {
     return data.actor;

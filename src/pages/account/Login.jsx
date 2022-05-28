@@ -23,7 +23,7 @@ export default function Login() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    const user = await authService.login(data);
+    const user = await authService.login({ ...data });
     if (user) {
       history.push("/");
     }

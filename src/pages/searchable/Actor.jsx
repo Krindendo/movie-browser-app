@@ -7,7 +7,7 @@ import Loading from "pages/public/Loading";
 
 export default function Actor() {
   const { actorId } = useParams();
-  const { isLoading, error, data: actor, isFetching } = useGetActor(actorId);
+  const { isLoading, error, data: actor, isFetching } = useGetActor({ actorId });
 
   if (isLoading) {
     return <Loading />;

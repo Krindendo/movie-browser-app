@@ -7,17 +7,13 @@ export default function useAuth() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    if (user) {
-      setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false);
-    }
+    setIsLoggedIn(!!user);
+    console.log("user", user);
   }, [user]);
 
   const isUserHaveComment = (comments) => {
     if (comments?.length > 0) {
-      const isUserAlreadyHaveComment = comments.find((comment) => comment.user_id === user);
-      if (isUserAlreadyHaveComment) return true;
+      return comments.some((comment) => comment.user_id === user);
     }
     return false;
   };
