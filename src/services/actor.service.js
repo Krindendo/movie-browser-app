@@ -20,7 +20,15 @@ const getActor = async ({ actorId }) => {
   }
   return null;
 };
-const createActor = async ({ body }) => {
+const createActor = async ({ name, professions, movies, born_date, biography, image }) => {
+  const body = {
+    name,
+    professions,
+    movies,
+    born_date,
+    biography,
+    image
+  };
   const data = await api("/", "POST", body);
   if (data?.actor) {
     return data.actor;

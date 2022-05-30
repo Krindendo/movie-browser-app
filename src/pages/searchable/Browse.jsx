@@ -15,20 +15,42 @@ export default function Browse() {
   const [genre, setGenre] = useState("");
   const [orderBy, setOrderBy] = useState("");
 
+  const output = useRef({ input: "", rating: "", titleSort: "", releasedSort: "" });
+
   const handleInput = (event) => {
-    setInput(event.target.value);
+    const value = event.target.value;
+    setInput(value);
+    output.current.input = value;
   };
   const handleGenre = (event) => {
-    setGenre(event.target.value);
+    const value = event.target.value;
+    setGenre(value);
+    output.current.genre = value;
+    if (value === "default") {
+      output.current.genre = "";
+    }
   };
   const handleRating = (event) => {
-    setRating(event.target.value);
+    const value = event.target.value;
+    setRating(value);
+    output.current.rating = value;
+    if (value === "default") {
+      output.current.rating = "";
+    }
   };
   const handleOrderBy = (event) => {
-    setOrderBy(event.target.value);
+    const value = event.target.value;
+    setOrderBy(value);
+    if (value === "najnoviji") {
+      output.current.releasedSort = "desc";
+    }
+    if (value === "najstariji") {
+      output.current.releasedSort = "asc";
+    }
+    if (value === "abecedno") {
+      output.current.titleSort = "asc";
+    }
   };
-
-  const output = useRef({ input: "", rating: "", titleSort: "", releasedSort: "" });
 
   const {
     isLoading,
@@ -44,37 +66,20 @@ export default function Browse() {
   });
 
   const handleSubmit = () => {
-    output.current.input = input;
-    output.current.genre = genre;
-    output.current.rating = rating;
-
-    if (orderBy === "najnoviji") {
-      output.current.releasedSort = "desc";
-    }
-    if (orderBy === "najstariji") {
-      output.current.releasedSort = "asc";
-    }
-    if (orderBy === "abecedno") {
-      output.current.titleSort = "asc";
-    }
-    if (rating === "default") {
-      output.current.rating = "";
-    }
-    if (genre === "default") {
-      output.current.genre = "";
-    }
     refetch();
   };
 
   useEffect(() => {
-    if (query.get("title")) {
-      setInput(query.get("title"));
+    async function fetchData() {
+      const queryParam = query.get("title");
+      if (queryParam) {
+        output.current.input = queryParam;
+        await setInput(queryParam);
+      }
+      refetch();
     }
-  }, [query]);
-
-  useEffect(() => {
-    refetch();
-  }, []);
+    fetchData();
+  }, [query, refetch]);
 
   return (
     <Layout>
