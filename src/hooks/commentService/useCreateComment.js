@@ -1,24 +1,24 @@
+import { COMMENTS_CONSTANT } from "hooks/movieService/constants";
 import { useMutation, queryCache } from "react-query";
-import commentService from "services/comment.service.js";
-import { COMMENT_CONSTANT } from "./constants";
+import { commentService } from "services/comment.service.js";
 
-export default function useCreateComment({ ...comment }) {
-  return useMutation(() => commentService.createComment({ ...comment }), {
+export default function useCreateComment() {
+  return useMutation(({ ...comment }) => commentService.createComment({ ...comment }), {
     onMutate: (comment) => {
-      const oldComments = queryCache.getQueryData(COMMENT_CONSTANT);
+      queryCache.cancelQueries(COMMENTS_CONSTANT);
+      const oldComments = queryCache.getQueryData(COMMENTS_CONSTANT);
 
-      if (queryCache.getQueryData(COMMENT_CONSTANT)) {
-        queryCache.setQueryData(COMMENT_CONSTANT, (old) => [...old, comment]);
-      }
+      queryCache.getQueryData(COMMENTS_CONSTANT, (old) => {
+        return [...old, comment];
+      });
 
-      return () => queryCache.setQueryData(COMMENT_CONSTANT, oldComments);
+      return () => queryCache.setQueryData(COMMENTS_CONSTANT, oldComments);
     },
-    onError: (error, _comment, rollback) => {
-      console.error("error", error);
-      if (rollback) rollback();
+    onError: (error, values, rollback) => {
+      rollback();
     },
-    onSettled: () => {
-      queryCache.invalidateQueries(COMMENT_CONSTANT);
+    onSuccess: () => {
+      queryCache.invalidateQueries(COMMENTS_CONSTANT);
     }
   });
 }
