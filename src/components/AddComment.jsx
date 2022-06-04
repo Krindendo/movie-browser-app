@@ -3,12 +3,13 @@ import Box from "./Box";
 import styled from "styled-components";
 import AddIcon from "@mui/icons-material/Add";
 import AddCommentDialog from "./AddCommentDialog";
-import { commentService } from "services/comment.service";
 import { useParams } from "react-router-dom";
+import useCreateComment from "hooks/commentService/useCreateComment";
 
 export default function AddComment({ handleChanged }) {
   let { movieId } = useParams();
   const [open, setOpen] = useState(false);
+  const createComment = useCreateComment({ movieId });
 
   const handleOpenDialog = () => {
     setOpen(true);
@@ -18,7 +19,7 @@ export default function AddComment({ handleChanged }) {
   };
 
   const handleSave = async (input) => {
-    await commentService.createComment({ movie_id: movieId, text: input });
+    await createComment.mutate({ movieId, text: input });
     setOpen(false);
     handleChanged();
   };

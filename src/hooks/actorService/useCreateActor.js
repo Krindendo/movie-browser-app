@@ -1,24 +1,21 @@
 import { useMutation, queryCache } from "react-query";
 import { actorService } from "actor.service.js";
-import { ACTOR_CONSTANT } from "./constants";
+import { ACTORS_CONSTANT } from "./constants";
 
 export default function useCreateActor({ ...actor }) {
   return useMutation(() => actorService.createActor({ ...actor }), {
     onMutate: (actor) => {
-      const oldActors = queryCache.getQueryData(ACTOR_CONSTANT);
+      const oldActors = queryCache.getQueryData([ACTORS_CONSTANT, actor._id]);
 
-      if (queryCache.getQueryData(ACTOR_CONSTANT)) {
-        queryCache.setQueryData(ACTOR_CONSTANT, (old) => [...old, actor]);
+      if (queryCache.getQueryData([ACTORS_CONSTANT, actor._id])) {
+        queryCache.setQueryData([ACTORS_CONSTANT, actor._id], (old) => [...old, actor]);
       }
 
-      return () => queryCache.setQueryData(ACTOR_CONSTANT, oldActors);
+      return () => queryCache.setQueryData([ACTORS_CONSTANT, actor._id], oldActors);
     },
-    onError: (error, _actor, rollback) => {
-      console.error("error", error);
-      if (rollback) rollback();
-    },
+    onError: (error, _actor, rollback) => rollback?.(),
     onSettled: () => {
-      queryCache.invalidateQueries(ACTOR_CONSTANT);
+      queryCache.invalidateQueries([ACTORS_CONSTANT, actor._id]);
     }
   });
 }

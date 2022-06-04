@@ -2,6 +2,10 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export default function LowerPart({ movie }) {
+  if (!movie) {
+    return <></>;
+  }
+
   return (
     <>
       <Fullplot>{movie.fullplot}</Fullplot>

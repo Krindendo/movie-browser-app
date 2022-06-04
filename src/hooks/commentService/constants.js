@@ -1,1 +1,1 @@
-export const COMMENT_CONSTANT = "comment";
+export const COMMENTS_CONSTANT = "comments";

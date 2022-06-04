@@ -4,13 +4,16 @@ import styled from "styled-components";
 import { formatDate } from "helper/formatDate";
 import CloseIcon from "@mui/icons-material/Close";
 import EditIcon from "@mui/icons-material/Edit";
-import { commentService } from "services/comment.service";
 import AddCommentDialog from "./AddCommentDialog";
 import useAuth from "hooks/useAuth";
+import useUpdateComment from "hooks/commentService/useUpdateComment";
+import useDeleteComment from "hooks/commentService/useDeleteComment";
 
 export default function CommentBox({ comment, handleChanged }) {
   const [open, setOpen] = useState(false);
   const { isUserHaveComment } = useAuth();
+  const updateComment = useUpdateComment({ movieId: comment.movie_id });
+  const deleteComment = useDeleteComment({ movieId: comment.movie_id });
 
   const handleOpenDialog = () => {
     setOpen(true);
@@ -20,34 +23,34 @@ export default function CommentBox({ comment, handleChanged }) {
   };
 
   const handleEdit = async (input) => {
-    await commentService.updateComment(comment._id, { text: input });
+    updateComment.mutate({ commentId: comment._id, text: input });
     handleChanged();
     setOpen(false);
   };
   const handleDelete = async () => {
-    await commentService.deleteComment(comment._id);
+    deleteComment.mutate({ commentId: comment._id });
     handleChanged();
   };
 
-  if (comment) {
-    return (
-      <>
-        <StyledBox>
-          <Text>{formatDate(new Date(comment.date))}</Text>
-          <Text>{comment.name}</Text>
-          <SubText>{comment.text}</SubText>
-          {isUserHaveComment([comment]) && (
-            <>
-              <EditIconStyled onClick={handleOpenDialog} />
-              <CloseIconStyled onClick={handleDelete} />
-            </>
-          )}
-        </StyledBox>
-        <AddCommentDialog open={open} handleClose={handleCloseDialog} handleClick={handleEdit} />
-      </>
-    );
+  if (!comment) {
+    return <></>;
   }
-  return <></>;
+  return (
+    <>
+      <StyledBox>
+        <Text>{formatDate(new Date(comment.date))}</Text>
+        <Text>{comment.name}</Text>
+        <SubText>{comment.text}</SubText>
+        {isUserHaveComment([comment]) && (
+          <>
+            <EditIconStyled onClick={handleOpenDialog} />
+            <CloseIconStyled onClick={handleDelete} />
+          </>
+        )}
+      </StyledBox>
+      <AddCommentDialog open={open} handleClose={handleCloseDialog} handleClick={handleEdit} />
+    </>
+  );
 }
 
 const StyledBox = styled(Box)`

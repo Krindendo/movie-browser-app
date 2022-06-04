@@ -1,22 +1,22 @@
-import { COMMENTS_CONSTANT } from "hooks/movieService/constants";
-import { useMutation, queryCache } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { commentService } from "services/comment.service.js";
+import { COMMENTS_CONSTANT } from "./constants";
 
-export default function useUpdateComment() {
+export default function useUpdateComment({ movieId }) {
+  const queryClient = useQueryClient();
   return useMutation(({ ...comment }) => commentService.updateComment({ ...comment }), {
-    onMutate: (comment) => {
-      queryCache.cancelQueries(COMMENTS_CONSTANT);
+    onMutate: async (newComment) => {
+      await queryClient.cancelQueries([COMMENTS_CONSTANT, movieId, newComment.commentId]);
+      const previousComment = queryClient.getQueryData([COMMENTS_CONSTANT, movieId, newComment.commentId]);
+      queryClient.setQueryData([COMMENTS_CONSTANT, movieId, newComment.commentId], newComment);
 
-      const oldComment = queryCache.getQueryData([COMMENTS_CONSTANT, comment._id]);
-
-      queryCache.setQueryData([COMMENTS_CONSTANT, comment._id], comment);
-
-      return () => queryCache.setQueryData([COMMENTS_CONSTANT, comment._id], oldComment);
+      return { previousComment, newComment };
     },
-    onError: (error, values, rollback) => rollback(),
-    onSuccess: (comment) => {
-      queryCache.invalidateQueries(COMMENTS_CONSTANT);
-      queryCache.invalidateQueries([COMMENTS_CONSTANT, comment._id]);
+    onError: (error, newComment, context) => {
+      queryClient.setQueryData([COMMENTS_CONSTANT, movieId, context.newComment.commentId], context.previousComment);
+    },
+    onSuccess: (newComment) => {
+      queryClient.invalidateQueries([COMMENTS_CONSTANT, movieId, newComment.commentId]);
     }
   });
 }

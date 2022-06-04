@@ -1,11 +1,9 @@
 import api from "helper/apiRequest";
 const baseUrl = "/api/v1/comment";
 
-const createComment = async ({ name, movieId: movie_id, user_id, text }) => {
+const createComment = async ({ movieId: movie_id, text }) => {
   const body = {
-    name,
     movie_id,
-    user_id,
     text
   };
   const data = await api(baseUrl + "/", "POST", body, true);
@@ -21,11 +19,9 @@ const getComment = async ({ commentId }) => {
   }
   return null;
 };
-const updateComment = async ({ commentId, name, movieId: movie_id, user_id, text }) => {
+const updateComment = async ({ commentId, movieId: movie_id, text }) => {
   const body = {
-    name,
     movie_id,
-    user_id,
     text
   };
   const data = await api(`${baseUrl}/${commentId}`, "PATCH", body, true);

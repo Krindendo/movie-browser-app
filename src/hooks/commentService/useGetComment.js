@@ -1,11 +1,12 @@
-import { COMMENTS_CONSTANT } from "hooks/movieService/constants";
-import { useQuery, queryCache } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import { commentService } from "services/comment.service.js";
+import { COMMENTS_CONSTANT } from "./constants";
 
-export default function useGetComment({ commentId }) {
-  return useQuery([COMMENTS_CONSTANT, commentId], () => commentService.getComment(commentId), {
+export default function useGetComment({ movieId, commentId }) {
+  const queryClient = useQueryClient();
+  return useQuery([COMMENTS_CONSTANT, movieId, commentId], () => commentService.getComment(commentId), {
     placeholderData: () => {
-      return queryCache.getQueryData(COMMENTS_CONSTANT)?.find((comment) => comment._id === commentId);
+      return queryClient.getQueryData([COMMENTS_CONSTANT, movieId])?.find((comment) => comment._id === commentId);
     },
     staleTime: 2000
   });

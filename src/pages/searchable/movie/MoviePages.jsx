@@ -27,12 +27,28 @@ export default function MoviePages() {
     setIsCommentsChanged((prevValue) => prevValue + 1);
   };
 
-  if (isMovieLoading || isCommentsLoading) {
+  if (isMovieLoading) {
     return <Loading />;
   }
 
   if (isMovieError || isCommentError) {
-    return <div>Greska</div>;
+    return (
+      <Layout>
+        <Container>
+          <h1>Doslo je do greske</h1>
+        </Container>
+      </Layout>
+    );
+  }
+
+  if (!movie) {
+    return (
+      <Layout>
+        <Container>
+          <h1>Film ne postoji</h1>
+        </Container>
+      </Layout>
+    );
   }
 
   return (

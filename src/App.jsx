@@ -8,6 +8,7 @@ import RegisterPage from "pages/account/Register";
 import ActorPage from "pages/searchable/Actor";
 import BrowsePage from "pages/searchable/Browse";
 import MoviePage from "pages/searchable/movie/MoviePages";
+// eslint-disable-next-line no-unused-vars
 const SettingsPage = lazy(() => import("pages/protected/settings/Settings"));
 
 export default function App() {
