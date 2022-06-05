@@ -1,12 +1,9 @@
 import MovieCard from "components/MovieCard";
+import styled from "styled-components";
 
 export default function ListOfMovies({ movies }) {
   if (!movies) {
-    return (
-      <>
-        <p>Nema filmova</p>
-      </>
-    );
+    return <Text>Nema filmova</Text>;
   }
 
   return (
@@ -17,3 +14,9 @@ export default function ListOfMovies({ movies }) {
     </>
   );
 }
+
+const Text = styled.p`
+  color: var(--secondary-color);
+  font-size: 1.1rem;
+  font-weight: 500;
+`;

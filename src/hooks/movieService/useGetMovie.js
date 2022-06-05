@@ -7,7 +7,6 @@ export default function useGetMovie({ movieId }) {
   return useQuery([MOVIES_CONSTANT, movieId], () => movieService.getMovie({ movieId }), {
     initialData: () => {
       return queryClient.getQueryData(MOVIES_CONSTANT)?.find((movie) => movie._id === movieId);
-    },
-    initialStale: true //mozda
+    }
   });
 }

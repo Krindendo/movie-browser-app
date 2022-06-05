@@ -3,9 +3,10 @@ import styled from "styled-components";
 import Layout from "layout/Layout";
 import ListOfMovies from "components/ListOfMovies";
 import undrawSvg from "assets/svg/undraw_horror_movie_3988.svg";
+import ListOfMoviesSkeleton from "components/Skeletons/ListOfMoviesSkeleton";
 
 export default function Landing() {
-  const { isLoading, error, data: movies, isFetching } = useGetMovies({ enabled: true });
+  const { isLoading, error, data: movies } = useGetMovies({ enabled: true });
 
   return (
     <Layout>
@@ -20,9 +21,7 @@ export default function Landing() {
           </RightPart>
         </UpperPart>
         <FilmTitle>Najpopularniji filmovi:</FilmTitle>
-        <FilmContainer>
-          <ListOfMovies movies={movies} />
-        </FilmContainer>
+        <FilmContainer>{isLoading ? <ListOfMoviesSkeleton /> : <ListOfMovies movies={movies} />}</FilmContainer>
       </Container>
     </Layout>
   );

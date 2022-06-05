@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import Box from "./Box";
+import Box from "components/Box";
 
 export default function MovieCard({ id, title, subtitle, year }) {
   let history = useHistory();

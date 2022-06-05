@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Box from "./Box";
 import styled from "styled-components";
-import { formatDate } from "helper/formatDate";
+import formatDate from "helper/formatDate";
 import CloseIcon from "@mui/icons-material/Close";
 import EditIcon from "@mui/icons-material/Edit";
 import AddCommentDialog from "./AddCommentDialog";

@@ -1,5 +1,5 @@
 import api from "helper/apiRequest";
-import { formatDate } from "helper/formatDate";
+import formatDate from "helper/formatDate";
 const baseUrl = "/api/v1/actor";
 
 const getActors = async () => {

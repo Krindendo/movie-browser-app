@@ -13,10 +13,11 @@ const months = [
   "decembar"
 ];
 
-export const formatDate = (date) => {
-  if (date) {
+const formatDate = (date) => {
+  if (date && Object.prototype.toString.call(date) === "[object Date]") {
     return `${date.getDate()}. ${months[date.getMonth()]} ${date.getFullYear()}.`;
-  } else {
-    return "00.00.0000";
   }
+  return "00.00.0000";
 };
+
+export default formatDate;

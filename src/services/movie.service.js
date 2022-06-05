@@ -1,10 +1,10 @@
 import api from "helper/apiRequest";
-import { formatDate } from "helper/formatDate";
+import formatDate from "helper/formatDate";
 const baseUrl = "/api/v1/movie";
 
 const getMovies = async ({ title, rating, titleSort, releasedSort, skip }) => {
   let content = [];
-  let apiCall = "";
+  let queryString = "";
   if (title) {
     content.push(`&title=${title}`);
   } else {
@@ -30,10 +30,10 @@ const getMovies = async ({ title, rating, titleSort, releasedSort, skip }) => {
   }
   if (content.length > 0) {
     content[0] = content[0].substring(1); //Remove & from first element;
-    apiCall = "?";
-    apiCall += content.reduce((prevItem, curentItem) => prevItem + curentItem);
+    queryString = "?";
+    queryString += content.reduce((prevItem, curentItem) => prevItem + curentItem);
   }
-  const data = await api(baseUrl + apiCall, "GET");
+  const data = await api(baseUrl + queryString, "GET");
   if (data?.movies) {
     return data.movies;
   }

@@ -134,26 +134,3 @@ const MovieList = styled.div`
     grid-template-columns: 275px;
   }
 `;
-
-// useEffect(() => {
-//   const fetchData = async () => {
-//     let data;
-//     if (submitedValue) {
-//       data = await movieService.getAllMovies(
-//         submitedValue.title,
-//         submitedValue.rating,
-//         submitedValue.titleSort,
-//         submitedValue.releasedSort,
-//         submitedValue.skip
-//       );
-//     } else if (query.get("title")) {
-//       data = await movieService.getAllMovies(query.get("title"), "", "", "desc");
-//     } else {
-//       data = await movieService.getAllMovies("", "", "", "desc");
-//     }
-//     if (data) {
-//       setMovies(data);
-//     }
-//   };
-//   fetchData();
-// }, [query, submitedValue]);
