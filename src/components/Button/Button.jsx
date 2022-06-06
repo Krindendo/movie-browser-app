@@ -1,6 +1,24 @@
 import { useState, useEffect } from "react";
-
 import styled from "styled-components";
+
+export default function Button({ text, type = "button" }) {
+  const [focusVisible, setFocusVisible] = useState(false);
+
+  const handleClick = (event) => {
+    const target = event.target;
+    if (process.env.NODE_ENV === "development") {
+      console.log("e.pageY", event.pageY - target.offsetTop);
+      console.log("e.pageY", event.pageX - target.offsetLeft);
+    }
+  };
+
+  return (
+    <StyledButton type={type} onClick={handleClick}>
+      {text}
+      <Span />
+    </StyledButton>
+  );
+}
 
 const StyledButton = styled.button`
   display: inline-flex;
@@ -51,22 +69,3 @@ const Span = styled.span`
   left: 0;
   border-radius: inherit;
 `;
-
-export default function Button({ text, type = "button" }) {
-  const [focusVisible, setFocusVisible] = useState(false);
-
-  const handleClick = (event) => {
-    const target = event.target;
-    if (process.env.NODE_ENV === "development") {
-      console.log("e.pageY", event.pageY - target.offsetTop);
-      console.log("e.pageY", event.pageX - target.offsetLeft);
-    }
-  };
-
-  return (
-    <StyledButton type={type} onClick={handleClick}>
-      {text}
-      <Span />
-    </StyledButton>
-  );
-}

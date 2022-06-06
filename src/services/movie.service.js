@@ -42,7 +42,7 @@ const getMovies = async ({ title, rating, titleSort, releasedSort, skip }) => {
 const getMovie = async ({ movieId }) => {
   const data = await api(baseUrl + `/${movieId}`, "GET");
   if (data?.movie) {
-    data.movie.dateFormated = formatDate(new Date(data.movie.released.slice(0, -1)));
+    data.movie.dateFormated = formatDate(data.movie.released.slice(0, -1));
     return data.movie;
   }
   return null;

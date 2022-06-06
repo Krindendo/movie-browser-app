@@ -38,7 +38,7 @@ export default function CommentBox({ comment, handleChanged }) {
   return (
     <>
       <StyledBox>
-        <Text>{formatDate(new Date(comment.date))}</Text>
+        <Text>{formatDate(comment.date)}</Text>
         <Text>{comment.name}</Text>
         <SubText>{comment.text}</SubText>
         {isUserHaveComment([comment]) && (
