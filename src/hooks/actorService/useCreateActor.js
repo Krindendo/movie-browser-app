@@ -1,21 +1,24 @@
-import { useMutation, queryCache } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { actorService } from "actor.service.js";
 import { ACTORS_CONSTANT } from "./constants";
 
-export default function useCreateActor({ ...actor }) {
-  return useMutation(() => actorService.createActor({ ...actor }), {
-    onMutate: (actor) => {
-      const oldActors = queryCache.getQueryData([ACTORS_CONSTANT, actor._id]);
+export default function useCreateActor({ actorId }) {
+  const queryClient = useQueryClient();
+  return useMutation(({ ...actor }) => actorService.createActor({ ...actor }), {
+    onMutate: (newActor) => {
+      queryClient.cancelQueries([ACTORS_CONSTANT, actorId]);
 
-      if (queryCache.getQueryData([ACTORS_CONSTANT, actor._id])) {
-        queryCache.setQueryData([ACTORS_CONSTANT, actor._id], (old) => [...old, actor]);
-      }
+      const previousActors = queryClient.getQueryData([ACTORS_CONSTANT, actorId]);
 
-      return () => queryCache.setQueryData([ACTORS_CONSTANT, actor._id], oldActors);
+      queryClient.setQueryData([ACTORS_CONSTANT, actorId], (old) => [...old, newActor]);
+
+      return { previousActors };
     },
-    onError: (error, _actor, rollback) => rollback?.(),
-    onSettled: () => {
-      queryCache.invalidateQueries([ACTORS_CONSTANT, actor._id]);
+    onError: (error, newActor, context) => {
+      queryClient.setQueryData([ACTORS_CONSTANT, actorId], context.previousActors);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries([ACTORS_CONSTANT, actorId]);
     }
   });
 }

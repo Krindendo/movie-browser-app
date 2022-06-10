@@ -8,6 +8,6 @@ export default function useGetComment({ movieId, commentId }) {
     placeholderData: () => {
       return queryClient.getQueryData([COMMENTS_CONSTANT, movieId])?.find((comment) => comment._id === commentId);
     },
-    staleTime: 2000
+    staleTime: 10 * 60 * 1000
   });
 }

@@ -20,7 +20,7 @@ export default function useCreateComment({ movieId }) {
       return { previousComments };
     },
     onError: (error, newComment, context) => {
-      queryClient.setQueryData([COMMENTS_CONSTANT, movieId], context.previousTodos);
+      queryClient.setQueryData([COMMENTS_CONSTANT, movieId], context.previousComments);
     },
     onSuccess: () => {
       queryClient.invalidateQueries([COMMENTS_CONSTANT, movieId]);
