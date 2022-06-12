@@ -7,7 +7,6 @@ import ListOfMoviesSkeleton from "components/Skeletons/ListOfMoviesSkeleton";
 
 export default function Landing() {
   const { isLoading, error, data: movies } = useGetMovies({ enabled: true });
-
   return (
     <Layout>
       <Container>

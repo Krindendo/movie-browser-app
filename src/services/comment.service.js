@@ -1,4 +1,4 @@
-import api from "helper/apiRequest";
+import request from "utils/axios";
 const baseUrl = "/api/v1/comment";
 
 const createComment = async ({ movieId: movie_id, text }) => {
@@ -6,14 +6,14 @@ const createComment = async ({ movieId: movie_id, text }) => {
     movie_id,
     text
   };
-  const data = await api(baseUrl + "/", "POST", body, true);
+  const data = await request(baseUrl + "/", "POST", body, true);
   if (data?.comment) {
     return data.comment;
   }
   return null;
 };
 const getComment = async ({ commentId }) => {
-  const data = await api(`${baseUrl}/${commentId}`, "GET", {}, true);
+  const data = await request(`${baseUrl}/${commentId}`, "GET", {}, true);
   if (data?.comment) {
     return data.comment;
   }
@@ -24,14 +24,14 @@ const updateComment = async ({ commentId, movieId: movie_id, text }) => {
     movie_id,
     text
   };
-  const data = await api(`${baseUrl}/${commentId}`, "PATCH", body, true);
+  const data = await request(`${baseUrl}/${commentId}`, "PATCH", body, true);
   if (data?.comment) {
     return data.comment;
   }
   return null;
 };
 const deleteComment = async ({ commentId }) => {
-  const data = await api(`${baseUrl}/${commentId}`, "DELETE", {}, true);
+  const data = await request(`${baseUrl}/${commentId}`, "DELETE", {}, true);
   if (data?.msg) {
     return data.msg;
   }

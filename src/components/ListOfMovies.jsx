@@ -16,7 +16,6 @@ export default function ListOfMovies({ movies }) {
 }
 
 const Text = styled.p`
-  color: var(--secondary-color);
   font-size: 1.1rem;
   font-weight: 500;
 `;

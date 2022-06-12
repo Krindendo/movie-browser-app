@@ -1,4 +1,4 @@
-import api from "helper/apiRequest";
+import request from "utils/axios";
 import Cookies from "universal-cookie";
 const baseUrl = "/api/v1/auth";
 
@@ -8,7 +8,7 @@ const register = async ({ name, email, password }) => {
     email,
     password
   };
-  const data = await api(baseUrl + "/register", "POST", body, true);
+  const data = await request(baseUrl + "/register", "POST", body, true);
   if (data?.user) {
     saveUser(data.user);
     return data.user;
@@ -20,7 +20,7 @@ const login = async ({ email, password }) => {
     email,
     password
   };
-  const data = await api(baseUrl + "/login", "POST", body, true);
+  const data = await request(baseUrl + "/login", "POST", body, true);
   if (data?.user) {
     saveUser(data.user);
     return data.user;
@@ -28,7 +28,7 @@ const login = async ({ email, password }) => {
   return null;
 };
 const logout = async () => {
-  const data = await api(baseUrl + "/logout", "GET", true);
+  const data = await request(baseUrl + "/logout", "GET", true);
   localStorage.clear();
   new Cookies().remove("local_token");
   if (data?.msg) {

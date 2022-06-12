@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Box from "./Box";
 import styled from "styled-components";
-import formatDate from "helper/formatDate";
+import format from "utils/format";
 import CloseIcon from "@mui/icons-material/Close";
 import EditIcon from "@mui/icons-material/Edit";
 import AddCommentDialog from "./AddCommentDialog";
@@ -38,7 +38,7 @@ export default function CommentBox({ comment, handleChanged }) {
   return (
     <>
       <StyledBox>
-        <Text>{formatDate(comment.date)}</Text>
+        <Text>{format.Date(comment.date)}</Text>
         <Text>{comment.name}</Text>
         <SubText>{comment.text}</SubText>
         {isUserHaveComment([comment]) && (

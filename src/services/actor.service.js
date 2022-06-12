@@ -1,18 +1,18 @@
-import api from "helper/apiRequest";
-import formatDate from "helper/formatDate";
+import request from "utils/axios";
+import format from "utils/format";
 const baseUrl = "/api/v1/actor";
 
 const getActors = async () => {
-  const data = await api(baseUrl + "/", "GET");
+  const data = await request(baseUrl + "/", "GET");
   if (data?.actors) {
     return data.actors;
   }
   return [];
 };
 const getActor = async ({ actorId }) => {
-  const data = await api(baseUrl + `/${actorId}`, "GET");
+  const data = await request(baseUrl + `/${actorId}`, "GET");
   if (data?.actor) {
-    data.actor.dateFormated = formatDate(data.actor.born_date.slice(0, -1));
+    data.actor.dateFormated = format.Date(data.actor.born_date.slice(0, -1));
     data.actor.movies = data.actor.movies.map(({ movie_id: _id, title }) => {
       return { _id, title };
     });
@@ -29,7 +29,7 @@ const createActor = async ({ name, professions, movies, born_date, biography, im
     biography,
     image
   };
-  const data = await api("/", "POST", body);
+  const data = await request("/", "POST", body);
   if (data?.actor) {
     return data.actor;
   }

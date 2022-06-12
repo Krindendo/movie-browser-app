@@ -1,5 +1,5 @@
-import api from "helper/apiRequest";
-import formatDate from "helper/formatDate";
+import request from "utils/axios";
+import format from "utils/format";
 const baseUrl = "/api/v1/movie";
 
 const getMovies = async ({ title, rating, titleSort, releasedSort, skip }) => {
@@ -33,22 +33,22 @@ const getMovies = async ({ title, rating, titleSort, releasedSort, skip }) => {
     queryString = "?";
     queryString += content.reduce((prevItem, curentItem) => prevItem + curentItem);
   }
-  const data = await api(baseUrl + queryString, "GET");
+  const data = await request(baseUrl + queryString, "GET");
   if (data?.movies) {
     return data.movies;
   }
   return [];
 };
 const getMovie = async ({ movieId }) => {
-  const data = await api(baseUrl + `/${movieId}`, "GET");
+  const data = await request(baseUrl + `/${movieId}`, "GET");
   if (data?.movie) {
-    data.movie.dateFormated = formatDate(data.movie.released.slice(0, -1));
+    data.movie.dateFormated = format.Date(data.movie.released.slice(0, -1));
     return data.movie;
   }
   return null;
 };
 const getMovieComments = async ({ movieId }) => {
-  const data = await api(baseUrl + `/${movieId}/comments`, "GET");
+  const data = await request(baseUrl + `/${movieId}/comments`, "GET");
   if (data?.comments) {
     return data.comments;
   }
