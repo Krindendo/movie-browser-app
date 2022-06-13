@@ -3,17 +3,20 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
-import { QueryClient, QueryClientProvider, QueryCache } from "react-query";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./theme";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 
 const queryClient = new QueryClient({
-  queryCache: new QueryCache({
-    onError: (error) => toast.error(`Something went wrong: ${error.message}`)
-  }),
+  // queryCache: new QueryCache({
+  //   onError: (error) => toast.error(`Something went wrong: ${error.message}`)
+  // }),
+  // mutationCache: new MutationCache({
+  //   onError: (error) => toast.error(`Something went wrong: ${error.message}`)
+  // }),
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,

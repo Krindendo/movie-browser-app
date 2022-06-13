@@ -13,11 +13,10 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
 import { useForm } from "react-hook-form";
-import { Link, useHistory } from "react-router-dom";
-import authService from "services/auth.service";
+import { Link } from "react-router-dom";
+import useRegister from "hooks/authService/useRegister";
 
 export default function Register() {
-  const history = useHistory();
   const [showPassword, setShotPassword] = useState(false);
   const {
     register,
@@ -25,11 +24,10 @@ export default function Register() {
     formState: { errors }
   } = useForm();
 
-  const onSubmit = async (data) => {
-    const user = await authService.register({ ...data });
-    if (user) {
-      history.push("/");
-    }
+  const userRegistration = useRegister();
+
+  const onSubmit = (data) => {
+    userRegistration.mutate({ ...data });
   };
 
   return (

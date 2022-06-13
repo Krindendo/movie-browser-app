@@ -1,15 +1,15 @@
 import isObject from "utils/isObject";
 
-const Date = (string) => {
+const DateTime = (string) => {
   const date = new Date(string);
-  if (isObject.Date(date)) {
+  if (isObject.DateTime(date)) {
     return `${date.getDate()}. ${months[date.getMonth()]} ${date.getFullYear()}.`;
   }
   return "00.00.0000";
 };
 
 const format = {
-  Date
+  DateTime
 };
 
 export default format;

@@ -12,7 +12,7 @@ const getActors = async () => {
 const getActor = async ({ actorId }) => {
   const data = await request(baseUrl + `/${actorId}`, "GET");
   if (data?.actor) {
-    data.actor.dateFormated = format.Date(data.actor.born_date.slice(0, -1));
+    data.actor.dateFormated = format.DateTime(data.actor.born_date.slice(0, -1));
     data.actor.movies = data.actor.movies.map(({ movie_id: _id, title }) => {
       return { _id, title };
     });

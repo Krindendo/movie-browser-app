@@ -1,4 +1,5 @@
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const isDevEnvironment = process.env.NODE_ENV === "development";
 
@@ -22,14 +23,17 @@ const request = async (url, method, body, withCredentials = false) => {
         console.log(error.response.data);
         console.log(error.response.headers);
       }
+      toast.error(`Something went wrong: ${error.response.data.msg}`);
     } else if (error.request) {
       // The request was made but no response was received
       if (isDevEnvironment) {
         console.log(error.request);
       }
+      toast.error(`Something went wrong: ${error.message}`);
     } else {
       // Something happened in setting up the request that triggered an Error
       console.log("Error", error.message);
+      toast.error(`Something went wrong: ${error.message}`);
     }
     throw error;
   }

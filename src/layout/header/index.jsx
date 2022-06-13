@@ -1,27 +1,25 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useHistory, useLocation } from "react-router-dom";
-import authService from "services/auth.service";
+import { useLocation } from "react-router-dom";
 import { Link as LinkR } from "react-router-dom";
 import Button from "@mui/material/Button";
 import SearchInputNavbar from "components/SearchInputNavbar";
 import MenuIcon from "@mui/icons-material/Menu";
 import useWindowDimensions from "hooks/useWindowDimensions";
 import useAuth from "hooks/useAuth";
+import useLogout from "hooks/authService/useLogout";
 
 export default function Header() {
   const { isLoggedIn } = useAuth();
   const [showNavbar, setShowNavbar] = useState(true);
   const { width } = useWindowDimensions();
-  let history = useHistory();
   let { pathname } = useLocation();
 
-  const handleLogout = async (event) => {
+  const logout = useLogout();
+
+  const handleLogout = (event) => {
     event.preventDefault();
-    const msg = await authService.logout();
-    if (msg) {
-      history.push("/");
-    }
+    logout.mutate();
   };
 
   useEffect(() => {

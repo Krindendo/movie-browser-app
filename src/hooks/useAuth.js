@@ -7,7 +7,6 @@ export default function useAuth() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    console.log("user", user);
     setIsLoggedIn(!!user);
   }, [user]);
 

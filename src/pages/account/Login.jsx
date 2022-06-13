@@ -10,23 +10,20 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
 import { useForm } from "react-hook-form";
-import { Link, useHistory } from "react-router-dom";
-import authService from "services/auth.service";
+import { Link } from "react-router-dom";
+import useLogin from "hooks/authService/useLogin";
 
 export default function Login() {
-  const history = useHistory();
-
   const {
     register,
     handleSubmit,
     formState: { errors }
   } = useForm();
 
-  const onSubmit = async (data) => {
-    const user = await authService.login({ ...data });
-    if (user) {
-      history.push("/");
-    }
+  const login = useLogin();
+
+  const onSubmit = (data) => {
+    login.mutate({ ...data });
   };
 
   return (
