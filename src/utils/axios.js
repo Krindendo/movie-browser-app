@@ -20,10 +20,14 @@ const request = async (url, method, body, withCredentials = false) => {
       // Request made and server responded
       console.log(`Request faild with status ${error.response.status}`);
       if (isDevEnvironment) {
-        console.log(error.response.data);
-        console.log(error.response.headers);
+        console.log("error: data", error.response.data);
+        console.log("error: headers", error.response.headers);
       }
-      toast.error(`Something went wrong: ${error.response.data.msg}`);
+      if (error.response.data) {
+        toast.error(`Something went wrong: ${error.response.data.msg}`);
+      } else {
+        toast.error(`Something went wrong: ${error.message}`);
+      }
     } else if (error.request) {
       // The request was made but no response was received
       if (isDevEnvironment) {
