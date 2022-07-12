@@ -110,7 +110,10 @@ const Content = styled.div`
   align-items: center;
   background-color: var(--primary-dark-color);
   width: 100%;
-  padding: 5em 2em 0 2em;
+  padding: 5rem 2rem 0 2rem;
+  @media only screen and (max-width: 650px) {
+    padding-top: 2rem;
+  }
 `;
 const MovieList = styled.div`
   display: grid;

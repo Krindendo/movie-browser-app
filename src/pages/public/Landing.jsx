@@ -28,6 +28,9 @@ export default function Landing() {
 
 const Container = styled.div`
   padding: 2em;
+  @media only screen and (max-width: 650px) {
+    padding: 5px;
+  }
 `;
 const UpperPart = styled.section`
   display: flex;
@@ -101,6 +104,9 @@ const FilmTitle = styled.h3`
   max-width: 1570px;
   margin: 1rem auto;
   margin-top: 5rem;
+  @media only screen and (max-width: 650px) {
+    text-align: center;
+  }
 `;
 const FilmContainer = styled.section`
   display: grid;

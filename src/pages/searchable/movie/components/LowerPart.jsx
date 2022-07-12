@@ -39,6 +39,10 @@ const Fullplot = styled.p`
     font-size: 1.2rem;
     font-weight: 700;
   }
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+    text-align: justify;
+  }
 `;
 
 const GroupOfPeoples = styled.div`
@@ -46,6 +50,10 @@ const GroupOfPeoples = styled.div`
   justify-content: center;
   width: 50%;
   gap: 4em;
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+    gap: 2rem;
+  }
 `;
 const Title = styled.p`
   font-weight: 700;

@@ -35,7 +35,7 @@ export default function Actor() {
           </TopSection>
 
           <MiddleSection>
-            <img src={actor.image} alt={actor.name} height="280px" />
+            <ImageBiography src={actor.image} alt={actor.name} height="280px" />
             <Biography>{actor.biography}</Biography>
           </MiddleSection>
 
@@ -81,6 +81,9 @@ const BottomSection = styled.div`
 const Name = styled.h1`
   margin: 0;
   font-size: 2.3rem;
+  @media only screen and (max-width: 425px) {
+    font-size: 2rem;
+  }
 `;
 const Date = styled.h4`
   margin: 0;
@@ -107,6 +110,14 @@ const List = styled.ul`
   gap: 5px;
 `;
 
+const ImageBiography = styled.img`
+  height: 280px;
+
+  @media only screen and (max-width: 464px) {
+    width: 100%;
+    height: auto;
+  }
+`;
 const Biography = styled.p`
   width: min(100%, 75ch);
 `;

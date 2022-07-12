@@ -81,6 +81,9 @@ const Content = styled.div`
   background-color: var(--primary-dark-color);
   width: 100%;
   padding: 5em 2em 0 2em;
+  @media only screen and (max-width: 650px) {
+    padding-top: 2rem;
+  }
 `;
 const Wrapper = styled.div`
   max-width: 1600px;
@@ -89,10 +92,17 @@ const Wrapper = styled.div`
   flex-direction: column;
   margin: 0 auto;
   gap: 4em;
+  @media only screen and (max-width: 768px) {
+    gap: 2rem;
+  }
 `;
 const BottomWrapper = styled(Wrapper)`
   flex-direction: row;
   padding: 6rem 12px 3rem;
+  @media only screen and (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 const BottomWrapperReviews = styled(Wrapper)`
   flex-direction: row;

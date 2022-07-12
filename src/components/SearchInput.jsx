@@ -80,6 +80,9 @@ const BottomPart = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: 1em 12px 1em 0;
+  @media only screen and (max-width: 700px) {
+    flex-direction: column;
+  }
 `;
 const TextFieldStyled = muiStyled(TextField)(() => ({
   "& .MuiOutlinedInput-notchedOutline": {

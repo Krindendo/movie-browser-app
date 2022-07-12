@@ -52,6 +52,9 @@ const Title = styled.h3`
   font-size: 3rem;
   line-height: 3.125rem;
   color: var(--white-color);
+  @media only screen and (max-width: 375px) {
+    font-size: 2.2rem;
+  }
 `;
 const SubTitle = styled.h4`
   margin: 0;
@@ -84,10 +87,17 @@ const Wrapper = styled.div`
   flex-direction: row;
   padding: 0;
   margin: 0 0 8px 0;
+  @media only screen and (max-width: 425px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 const ImdbContent = styled.div`
   margin-left: auto;
+  @media only screen and (max-width: 425px) {
+    margin-left: initial;
+  }
 `;
 const Imdb = styled.div`
   align-self: flex-end;
